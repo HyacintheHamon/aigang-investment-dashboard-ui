@@ -1,0 +1,63 @@
+
+.trow {
+	
+	display: table;
+	margin: 0 -6px; 
+	position: relative;
+	
+	> *:not(.trow) {
+	
+		display: table-cell;
+		padding: 0 6px;
+		
+		&.trow-min {
+			width: 1%;
+		}
+		
+	}
+	
+	&.trow-wider {
+	
+		margin: 0 -11px;
+		
+		> *:not(.trow) {
+			padding: 0 11px;
+		}
+		
+	}
+	
+	> .trow {
+		display: table-row;
+	}
+	
+	&.trow-vmiddle {
+		
+		> *:not(.trow) {
+			vertical-align: middle;
+		}
+		
+	}
+	
+	&.trow-vtop {
+		
+		> *:not(.trow) {
+			vertical-align: top;
+		}
+		
+	}
+	
+	&.trow-vbottom {
+		
+		> *:not(.trow) {
+			vertical-align: bottom;
+		}
+		
+	}
+
+	&.trow-w100 {
+		
+		width: 100%;
+		
+	}
+	
+}

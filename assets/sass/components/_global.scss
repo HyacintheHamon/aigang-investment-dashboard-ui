@@ -1,0 +1,40 @@
+
+body {
+
+	overflow-y: scroll;
+	padding-top: 121px;
+	
+	@media (max-width: 1024px) {
+		font-size: 12px;
+		padding-top: 79px;
+	}
+	
+	
+	
+}
+
+.old-ie-warning {
+	
+	z-index: 9999;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	padding: 20px 25px;
+	font-weight: bold;
+	font-size: 16px;
+	background: $brand-danger;
+	color: #fff;
+	text-align: center;
+	border-top: darken($brand-danger, 10%) 5px solid;
+	
+	a {
+		color: inherit;
+		text-decoration: underline;
+	}
+	
+}
+
+.container {
+	max-width: 1200px;
+}

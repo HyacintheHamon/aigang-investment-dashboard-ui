@@ -1,0 +1,64 @@
+
+.container {
+
+	width: 100%;
+
+}
+
+
+.row-xs-flex {
+	display: flex;
+}
+
+@media (min-width: $screen-sm-min) {
+	.row-sm-flex {
+		display: flex;
+	}
+}
+
+
+@media (min-width: $screen-md-min) {
+	.row-md-flex {
+		display: flex;
+	}
+}
+
+
+@media (min-width: $screen-lg-min) {
+	.row-lg-flex {
+		display: flex;
+	}
+}
+
+
+.flex-vmiddle {
+	align-self: center;
+}
+
+.row-flex {
+	
+	display: flex;
+	
+	&:after,
+	&:before {
+		display: none;
+	}
+	
+}
+
+
+&[class*=row-flex] {
+	
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	
+	> [class*="col-"] {
+
+		flex-grow: 0;
+		flex-shrink: 1;
+		
+	}
+	
+}
+

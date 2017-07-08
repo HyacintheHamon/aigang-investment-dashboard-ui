@@ -1,0 +1,57 @@
+.btn {
+	box-shadow: none !important;
+	cursor: inherit;
+}
+
+button.btn,
+a.btn {
+
+	cursor: pointer;
+	transition: 0.35s all;
+
+	&:active,
+	&:focus,
+	&:hover {
+		opacity: 0.75;
+		box-shadow: none !important;
+	}
+	
+}
+
+.btn-default {
+	color: $brand-color-2;
+}
+
+.btn-primary {
+
+	color: $brand-color-3;
+	
+	&:active,
+	&:focus,
+	&:hover {
+		color: $brand-color-3 !important;
+		background: $brand-primary !important;
+	}
+	
+}
+
+
+.btn-dashed {
+
+	border: $gray-lighter 1px dashed;
+	color: $brand-color-1;
+	
+	&:active,
+	&:focus,
+	&:hover {
+		color: $brand-color-1;
+	}
+	
+}
+
+.btn-m {
+	font-size: 14px;
+	@media (max-width: 1024px) {
+		font-size: 12px;
+	}
+}
