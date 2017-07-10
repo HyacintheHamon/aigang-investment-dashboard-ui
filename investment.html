@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 
-
-
-
-
-
-<html lang="lt">
+<html lang="en">
 
 <head>
+	<script>
+		if( /Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent) ) {
+			window.location.replace("./coming-soon.html");		
+		}
+	</script>
 
 	<title></title>
 	<meta charset="utf-8">
@@ -26,7 +26,6 @@
 	<script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script>
 
 </head>
-
 
 
 <body class="template-investment">
@@ -80,16 +79,17 @@
 									<span><i class="cc-ETH"></i> <span class="text-muted small">ethereum</span></span>
 								</li>
 								<li class="list-group-item list-group-item__inv2">
-									<p id="wallet_address">No address</p>
+									<p id="wallet_address">0x0000000000000000000000000000000000000000</p>
 									<span class="text-muted">Ethereum id</span>
 								</li>
 								<li class="list-group-item list-group-item__inv3">
-									<span id="wallet_balance" class="badge badge-lg badge-trans">Empty</span>
+									<span id="wallet_balance" class="badge badge-lg badge-trans">N/A</span>
 									<span class="text-muted">Your balance</span>
 								</li>
 								<li class="list-group-item list-group-item__inv4">
 
-									<span class="badge badge-trans">€50</span>
+									<span class="badge badge-trans" id="invested">N/A</span>
+									<!--<span class="badge badge-trans">€50</span>-->
 									<p>
 										<span class="text-muted">Invested</span>
 									</p>
@@ -239,17 +239,19 @@
 						<div class="row">
 
 							<div class="col-xs-12 col-sm-4">
-								<p><span>Total insurance products</span> <span class="text-primary">200</span></p>
-								<p><span>Total insurers count</span> <span class="text-primary">500</span></p>
+								<p><span>Total insurance products</span> <span class="text-primary">1</span></p>
+								<!--TODO: ADD number to contract-->
+								<p><span>Total insurers count</span> <span id="totalInsurers" class="text-primary">N/A</span></p>
 							</div>
 
 							<div class="col-xs-12 col-sm-4">
 								<p><span>Total amount paid by insurers</span> <span class="text-primary">200</span></p>
+								<!--TODO: Check value from contract-->
 								<p><span>Total amount in reserves</span> <span class="text-primary">500</span></p>
 							</div>
 
 							<div class="col-xs-12 col-sm-4">
-								<p><span>Total amount paid for battery insurance</span> <span class="text-primary">200</span></p>
+								<p><span>Total amount paid for battery insurance</span> <span id="totalClaimsPaid" class="text-primary">N/A</span></p>
 							</div>
 
 						</div>
@@ -279,6 +281,9 @@
 							</thead>
 							<tbody>
 
+
+
+
 								<tr class="info">
 									<td valign="middle"><span class="text-primary-2">258414</span></td>
 									<td valign="middle">Phone battery</td>
@@ -287,10 +292,14 @@
 									<td valign="middle">280</td>
 									<td valign="middle">280</td>
 									<td valign="middle">280</td>
-									<td class="cell-btn text-right has-table-control" valign="middle">										
-										<span class="btn btn-m btn-dashed">Invested €9999</span>										
+									<td class="cell-btn text-right has-table-control" valign="middle">
+										<span class="btn btn-m btn-dashed">Invested €9999</span>
 									</td>
 								</tr>
+
+
+
+
 
 
 
@@ -304,7 +313,7 @@
 									<td valign="middle">280</td>
 									<td class="cell-btn text-right has-table-control" valign="middle">
 
-								
+
 
 										<button data-click="show-amount-form" class="btn btn-sm btn-primary">INVEST</button>
 
@@ -322,7 +331,7 @@
 											</div>
 										</div>
 
-										
+
 
 									</td>
 								</tr>
@@ -336,7 +345,7 @@
 									<td valign="middle">280</td>
 									<td valign="middle">280</td>
 									<td valign="middle">280</td>
-									<td class="cell-btn text-right has-table-control" valign="middle">									
+									<td class="cell-btn text-right has-table-control" valign="middle">
 
 										<button data-click="show-amount-form" class="btn btn-sm btn-primary">INVEST</button>
 
@@ -364,7 +373,7 @@
 					</div>
 
 
-					<!-- Modal -->
+					<!-- Modals -->
 					<div id="myModal" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-sm">
 
@@ -386,32 +395,42 @@
 					</div>
 
 
-					<!-- Modal -->
 					<div id="noWalletModal" class="modal fade" role="dialog">
 						<div class="modal-dialog modal-sm">
-
 							<!-- Modal content-->
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal">&times;</button>
-
 								</div>
 								<div class="modal-body">
-
 									<h3 class="text-primary-2 text-center">You are not using Mist browser or MetaMask extension</h3>
 									<p class="text-center">If you want to invest you should use one of them</p>
-
 								</div>
 							</div>
-
 						</div>
 					</div>
 
+
+					<div id="wrongNetworkModal" class="modal fade" role="dialog">
+						<div class="modal-dialog modal-sm">
+							<!-- Modal content-->
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+								</div>
+								<div class="modal-body">
+									<h3 class="text-primary-2 text-center">This application works only in Ropsten Test Network</h3>
+									<p class="text-center">Please switch your extension to test network.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+
+
 				</div>
-
-
 			</div>
-
 		</article>
 
 

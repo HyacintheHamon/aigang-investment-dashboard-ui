@@ -1681,8 +1681,6 @@ function get_ie_version() {
 
 $(function() {  
 
-
-
 	$(document).ready(function(){
    
 		
@@ -1754,26 +1752,16 @@ $(function() {
 		
 		
 		$(document).on('click touchend', function(evt){
-
 				var target = $(evt.target);    
 				
-				if ($(target).parents('.has-table-control').length > 0) {
-					
-					console.log(1);
-					
-				} else {
-					
-					$('.has-table-control').removeClass('table-control-active');
-						
+				if ($(target).parents('.has-table-control').length > 0) {					
+					console.log(1);					
+				} else {					
+					$('.has-table-control').removeClass('table-control-active');						
 				}
 				
-		});		
-		
+		});				
 
-	});
-	
+	});	
 
 });
-
-
-

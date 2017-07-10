@@ -8,7 +8,7 @@ $(function() {
 			
 			$('html').addClass('is-old-ie');
 			
-			$('body').prepend('<div class="old-ie-warning">Norėdami naudotis šia interneto svetaine privalote atnaujinti savo interneto naršyklę. Atsisiųskite norimą naršyklę adresu: <a target="_blank" href="http://outdatedbrowser.com/en">http://outdatedbrowser.com/en</a></div>');
+			$('body').prepend('<div class="old-ie-warning">If you want to use this web site you should update yout browser: <a target="_blank" href="http://outdatedbrowser.com/en">http://outdatedbrowser.com/en</a></div>');
 			
 		}
 				
@@ -39,15 +39,6 @@ $(function() {
 			
 		}, 500);
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		
 		
 		
@@ -87,11 +78,7 @@ $(function() {
 				}
 				
 		});		
-		
-
 	});
-	
-
 });
 
 
