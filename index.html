@@ -4,8 +4,8 @@
 
 <head>
 	<script>
-		if( /Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent) ) {
-			window.location.replace("./coming-soon.html");		
+		if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+			window.location.replace("./coming-soon.html");
 		}
 	</script>
 
@@ -15,6 +15,7 @@
 	<meta name="format-detection" content="telephone=no">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
+	<link rel='shortcut icon' type='image/x-icon' href='images/favicon.ico' />
 
 	<link href="http://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&amp;subset=cyrillic-ext,latin-ext" rel="stylesheet">
 	<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -39,7 +40,8 @@
 					</a>
 				</div>
 				<div class="text-xs-right text-sm-center">
-					<span class="site-header-page-title">Investment</span>
+					<span class="site-header-page-title">Investment </span>
+					<small><span class="text-muted">Demo</span></small>
 				</div>
 			</div>
 	</header>
@@ -80,7 +82,7 @@
 								</li>
 								<li class="list-group-item list-group-item__inv2">
 									<p id="wallet_address">0x0000000000000000000000000000000000000000</p>
-									<span class="text-muted">Ethereum id</span>
+									<span class="text-muted">Ethereum id <small>(Ropsten Test Net)</small></span>
 								</li>
 								<li class="list-group-item list-group-item__inv3">
 									<span id="wallet_balance" class="badge badge-lg badge-trans">N/A</span>
@@ -239,15 +241,14 @@
 						<div class="row">
 
 							<div class="col-xs-12 col-sm-4">
+								<!--TODO: ADD this number to contract-->
 								<p><span>Total insurance products</span> <span class="text-primary">1</span></p>
-								<!--TODO: ADD number to contract-->
 								<p><span>Total insurers count</span> <span id="totalInsurers" class="text-primary">N/A</span></p>
 							</div>
 
 							<div class="col-xs-12 col-sm-4">
-								<p><span>Total amount paid by insurers</span> <span class="text-primary">200</span></p>
-								<!--TODO: Check value from contract-->
-								<p><span>Total amount in reserves</span> <span class="text-primary">500</span></p>
+								<!--TODO: Implement reserves in contract-->
+								<p><span>Total amount in reserves</span> <span id="totalInvestedAmount" class="text-primary">N/A</span></p>
 							</div>
 
 							<div class="col-xs-12 col-sm-4">
@@ -271,8 +272,7 @@
 								<tr>
 									<th valign="top">ID</th>
 									<th valign="top">Insurance<br />type</th>
-									<th valign="top">Insurers<br />count</th>
-									<th valign="top">Amount paid<br />by insurers</th>
+									<th valign="top">Policies<br />count</th>									
 									<th valign="top">Ammount in<br />reserves</th>
 									<th valign="top">Amount paid<br />for insurance</th>
 									<th valign="top">Predicted<br />profit</th>
@@ -284,86 +284,58 @@
 
 
 
-								<tr class="info">
+								<tr>
 									<td valign="middle"><span class="text-primary-2">258414</span></td>
 									<td valign="middle">Phone battery</td>
-									<td valign="middle">205</td>
-									<td valign="middle">14</td>
-									<td valign="middle">280</td>
-									<td valign="middle">280</td>
-									<td valign="middle">280</td>
+									<td valign="middle" id="totalInsurers_table">N/A</td>
+									<!--TODO: Implement reserves in contract-->
+									<td valign="middle" id="totalInvestedAmount_table">N/A</td>	
+									<td valign="middle" id="totalClaimsPaid_table">N/A</td>													
+									<td valign="middle" id="predictedProfit_table">N/A</td>
 									<td class="cell-btn text-right has-table-control" valign="middle">
-										<span class="btn btn-m btn-dashed">Invested €9999</span>
-									</td>
+
+										<button data-click="show-amount-form" class="btn btn-sm btn-primary">INVEST</button>
+
+										<div class="table-control">
+											<div class="trow trow-vmiddle">
+												<div><label>Select amount to invest</label></div>
+												<div class="table-control-input">
+													<div class="input-group input-group-sm">
+														<input type="text" class="form-control" value="280" placeholder="">
+														<span class="input-group-btn">
+														<button data-toggle="modal" data-target="#myModal" data-click="submit-amount-form" class="btn btn-default" type="button">SUBMIT</button>
+													  </span>
+													</div>
+												</div>
+											</div>
+										</div>
+									</td>	
 								</tr>
 
 
 
-
-
-
-
-								<tr>
+								<tr class="info">
 									<td valign="middle"><span class="text-primary-2">258415</span></td>
 									<td valign="middle">Drone</td>
-									<td valign="middle">205</td>
-									<td valign="middle">15</td>
-									<td valign="middle">280</td>
-									<td valign="middle">280</td>
-									<td valign="middle">280</td>
+									<td valign="middle">-</td>
+									<td valign="middle">-</td>							
+									<td valign="middle">-</td>
+									<td valign="middle">-</td>
 									<td class="cell-btn text-right has-table-control" valign="middle">
-
-
-
-										<button data-click="show-amount-form" class="btn btn-sm btn-primary">INVEST</button>
-
-										<div class="table-control">
-											<div class="trow trow-vmiddle">
-												<div><label>Select amount to invest</label></div>
-												<div class="table-control-input">
-													<div class="input-group input-group-sm">
-														<input type="text" class="form-control" value="280" placeholder="">
-														<span class="input-group-btn">
-														<button data-toggle="modal" data-target="#myModal" data-click="submit-amount-form" class="btn btn-default" type="button">SUBMIT</button>
-													  </span>
-													</div>
-												</div>
-											</div>
-										</div>
-
-
-
+										<span class="btn btn-m btn-dashed">Coming soon</span>
 									</td>
 								</tr>
 
 
-								<tr>
+								<tr class="info">
 									<td valign="middle"><span class="text-primary-2">258416</span></td>
-									<td valign="middle">Tesla battery</td>
-									<td valign="middle">205</td>
-									<td valign="middle">16</td>
-									<td valign="middle">280</td>
-									<td valign="middle">280</td>
-									<td valign="middle">280</td>
+									<td valign="middle">Tesla car battery</td>
+									<td valign="middle">-</td>
+									<td valign="middle">-</td>								
+									<td valign="middle">-</td>
+									<td valign="middle">-</td>
 									<td class="cell-btn text-right has-table-control" valign="middle">
-
-										<button data-click="show-amount-form" class="btn btn-sm btn-primary">INVEST</button>
-
-										<div class="table-control">
-											<div class="trow trow-vmiddle">
-												<div><label>Select amount to invest</label></div>
-												<div class="table-control-input">
-													<div class="input-group input-group-sm">
-														<input type="text" class="form-control" value="280" placeholder="">
-														<span class="input-group-btn">
-														<button data-toggle="modal" data-target="#myModal" data-click="submit-amount-form" class="btn btn-default" type="button">SUBMIT</button>
-													  </span>
-													</div>
-												</div>
-											</div>
-										</div>
-
-
+										<span class="btn btn-m btn-dashed">Coming soon</span>
 									</td>
 								</tr>
 
