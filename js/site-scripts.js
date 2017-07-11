@@ -1673,16 +1673,9 @@ function get_ie_version() {
 }(jQuery);
 
 
-
-
-
-
-
-
-$(function() {  
+$(function() {
 
 	$(document).ready(function(){
-   
 		
 		var ie_version = get_ie_version();
 
@@ -1690,7 +1683,7 @@ $(function() {
 			
 			$('html').addClass('is-old-ie');
 			
-			$('body').prepend('<div class="old-ie-warning">Norėdami naudotis šia interneto svetaine privalote atnaujinti savo interneto naršyklę. Atsisiųskite norimą naršyklę adresu: <a target="_blank" href="http://outdatedbrowser.com/en">http://outdatedbrowser.com/en</a></div>');
+			$('body').prepend('<div class="old-ie-warning">If you want to use this web site you should update yout browser: <a target="_blank" href="http://outdatedbrowser.com/en">http://outdatedbrowser.com/en</a></div>');
 			
 		}
 				
@@ -1700,7 +1693,7 @@ $(function() {
 		
 		
 		//
-		// field with datepicker
+		// laukelis su kalendoriumi
 		//
 		if ($('.datepicker').length > 0) {
 			
@@ -1724,17 +1717,11 @@ $(function() {
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
 
 		
 		
 		$(document).on('click', '[data-click="show-amount-form"]', function(){
+
 			$('.has-table-control').removeClass('table-control-active');
 			
 			$(this).closest('.has-table-control').addClass('table-control-active');   
@@ -1746,22 +1733,30 @@ $(function() {
 		$(document).on('click', '[data-click="submit-amount-form"]', function(){
 				
 			$(this).closest('.has-table-control').removeClass('table-control-active');
+
+      App.investMoney();
 				
 		});		
 		
 		
 		
 		$(document).on('click touchend', function(evt){
+
 				var target = $(evt.target);    
 				
-				if ($(target).parents('.has-table-control').length > 0) {					
-					console.log(1);					
-				} else {					
-					$('.has-table-control').removeClass('table-control-active');						
+				if ($(target).parents('.has-table-control').length > 0) {
+					
+					console.log(1);
+					
+				} else {
+					
+					$('.has-table-control').removeClass('table-control-active');
+						
 				}
 				
-		});				
-
-	});	
-
+		});		
+	});
 });
+
+
+
