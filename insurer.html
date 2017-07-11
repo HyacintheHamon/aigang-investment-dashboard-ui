@@ -78,7 +78,7 @@
 
 									<span class="badge badge-trans" id="projectedProfit">N/A</span>
 									<p>
-										<span class="text-muted">Projected profit</span>
+										<span class="text-muted">Projected revenue</span>
 									</p>
 
 								</li>
@@ -220,16 +220,18 @@
 							<div class="col-xs-12 col-sm-4">
 								<!--TODO: ADD this number to contract-->
 								<p><span>Total insurance products</span> <span class="text-primary">1</span></p>
-								<p><span>Total insurers count</span> <span id="totalInsurers" class="text-primary">N/A</span></p>
+								<p><span>Total policies</span> <span id="totalInsurers" class="text-primary">N/A</span></p>
 							</div>
 
 							<div class="col-xs-12 col-sm-4">
 								<!--TODO: Implement reserves in contract-->
-								<p><span>Total amount in reserves</span> <span id="totalInvestedAmount" class="text-primary">N/A</span></p>
+								<p><span>Total invested amount</span> <span id="totalInvestedAmount" class="text-primary">N/A</span></p>
+								<p><span>Total amount in reserves</span> <span id="totalContractBalance" class="text-primary">N/A</span></p>
 							</div>
 
 							<div class="col-xs-12 col-sm-4">
 								<p><span>Total amount paid for battery insurance</span> <span id="totalClaimsPaid" class="text-primary">N/A</span></p>
+								<p><span>Total investors</span> <span id="totalInvestorsCount" class="text-primary">N/A</span></p>
 							</div>
 
 						</div>
@@ -249,8 +251,9 @@
 								<tr>
 									<th valign="top">ID</th>
 									<th valign="top">Insurance<br />type</th>
-									<th valign="top">Policies<br />count</th>									
-									<th valign="top">Ammount in<br />reserves</th>
+									<th valign="top">Investors<br /></th>	
+									<th valign="top">Policies<br /></th>									
+									<th valign="top">Invested<br />amount</th>
 									<th valign="top">Amount paid<br />for insurance</th>
 									<th valign="top">Predicted<br />profit</th>
 									<th valign="top" width="10%"></th>
@@ -260,10 +263,10 @@
 
 
 
-
 								<tr>
 									<td valign="middle"><span class="text-primary-2">258414</span></td>
 									<td valign="middle">Phone battery</td>
+									<td valign="middle" id="totalInvestorsCount_table">N/A</td>
 									<td valign="middle" id="totalInsurers_table">N/A</td>
 									<!--TODO: Implement reserves in contract-->
 									<td valign="middle" id="totalInvestedAmount_table">N/A</td>	
@@ -298,6 +301,7 @@
 								<tr class="info">
 									<td valign="middle"><span class="text-primary-2">258415</span></td>
 									<td valign="middle">Drone</td>
+									<td valign="middle" ></td>
 									<td valign="middle">-</td>
 									<td valign="middle">-</td>							
 									<td valign="middle">-</td>
@@ -310,7 +314,8 @@
 
 								<tr class="info">
 									<td valign="middle"><span class="text-primary-2">258416</span></td>
-									<td valign="middle">Tesla car battery</td>
+									<td valign="middle">Smart car</td>
+									<td valign="middle" ></td>
 									<td valign="middle">-</td>
 									<td valign="middle">-</td>								
 									<td valign="middle">-</td>

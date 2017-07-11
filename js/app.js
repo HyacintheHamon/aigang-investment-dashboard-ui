@@ -35,7 +35,8 @@ window.App = {
     // Get the initial account balance so it can be displayed.
     web3.eth.getAccounts(function (err, accs) {
       if (err != null) {
-        alert("There was an error fetching your accounts.");
+        console.log(err);
+        alert("There was an error fetching contract.");
         return;
       }
 
@@ -51,12 +52,30 @@ window.App = {
 
       $("#wallet_address").html(chunkedAcount);
 
-      web3.eth.getBalance(account, function (error, result) {
-        if (!error) {
+      web3.eth.getBalance(account, function (err, result) {
+        if (!err) {
           var value = web3.fromWei(result.toNumber(), 'ether');
           $("#wallet_balance").html(value);
         } else {
-          console.error(error);
+          console.log(err);
+          alert("There was an error fetching contract.");
+        }
+      });
+
+      policyContract.investors(account, function (err, value) {
+        if (err != null) {
+          console.log(err);
+          alert("There was an error fetching contract.6");
+          return;
+        }
+
+        var ethValue = web3.fromWei(value, 'ether');
+        $("#invested").html(ethValue.toString());
+
+        if (ethValue == 0) {
+          $("#projectedProfit").html("20% of an investment");
+        } else {
+          $("#projectedProfit").html((ethValue * 1.2).toFixed(4).toString());
         }
       });
     });
@@ -64,7 +83,7 @@ window.App = {
 
     policyContract.totalInsurers.call(function (err, value) {
       if (err != null) {
-        alert("There was an error fetching contract.");
+        alert("There was an error fetching contract. 5");
         return;
       }
 
@@ -74,37 +93,21 @@ window.App = {
 
     policyContract.totalClaimsPaid.call(function (err, value) {
       if (err != null) {
-        alert("There was an error fetching contract.");
+        console.log(err);
+        alert("There was an error fetching contract. 4");
         return;
       }
-      var value = web3.fromWei(value.toString(), 'ether');
-      $("#totalClaimsPaid").html(value.toString());
-      $("#totalClaimsPaid_table").html(value.toString());
+      var valueEth = web3.fromWei(value.toString(), 'ether');
+      $("#totalClaimsPaid").html(valueEth.toString());
+      $("#totalClaimsPaid_table").html(valueEth.toString());
     });
 
-
-    policyContract.investors.call(account, function (err, value) {
-      if (err != null) {
-        alert("There was an error fetching contract.");
-        return;
-      }
-
-      var ethValue = web3.fromWei(value, 'ether');
-      $("#invested").html(ethValue.toString());
-
-      if (ethValue == 0) {
-        $("#projectedProfit").html("20% of an investment");
-      } else {
-        $("#projectedProfit").html((ethValue * 1.2).toFixed(2).toString());
-      }
-
-
-    });
 
 
     policyContract.totalInvestedAmount.call(account, function (err, value) {
       if (err != null) {
-        alert("There was an error fetching contract.");
+        console.log(err);
+        alert("There was an error fetching contract. 3");
         return;
       }
 
@@ -112,7 +115,30 @@ window.App = {
       $("#totalInvestedAmount").html(ethValue.toString());
       $("#totalInvestedAmount_table").html(ethValue.toString());
 
-      $("#predictedProfit_table").html((ethValue * 1.2).toFixed(2).toString());
+      //$("#predictedProfit_table").html((ethValue * 1.2).toFixed(2).toString());
+      $("#predictedProfit_table").html("20%");
+    });
+
+    policyContract.totalInvestorsCount.call(account, function (err, value) {
+      if (err != null) {
+        console.log(err);
+        alert("There was an error fetching contract. 2");
+        return;
+      }
+
+      $("#totalInvestorsCount").html(value.toString());
+      $("#totalInvestorsCount_table").html(value.toString());
+    });
+
+    web3.eth.getBalance(contractAddress, function (err, value) {
+      if (err != null) {
+        console.log(err);
+        alert("There was an error fetching contract. 1");
+        return;
+      }
+
+      var valueEth = web3.fromWei(value, 'ether');
+      $("#totalContractBalance").html((valueEth * 1.0).toFixed(4).toString());
     });
 
 
@@ -126,9 +152,10 @@ window.App = {
     var investValue = $("#enterValue").val();
     var weiValue = web3.toWei(investValue, 'ether');
 
-    policyContract.invest(weiValue, { gas: 300000, from: account }, function (err, result) {
+    policyContract.invest(weiValue, { gas: 300000, from: account, value: weiValue }, function (err, result) {
 
       if (err != null) {
+        console.log(err);
         $("#modalTitle").html("Investment was canceled.");
         $("#modalText").html("Transaction is canceled.");
         $("#generalModal").modal('show');
@@ -136,22 +163,21 @@ window.App = {
         return;
       }
       else {
-        var etherscan = "https://ropsten.etherscan.io/address/" + result;
-        $("#modalTitle").html("Investment sent!");
-        $("#modalText").html("Details: " + "</br>" + "<a href=\"" + etherscan + "\" target=\"_blank\">" + etherscan + "</a>");
+        var etherscan = "https://ropsten.etherscan.io/tx/" + result;
+        $("#modalTitle").html("Investment Successful");
+        $("#modalText").html("Great success! Transaction has been sent. Ethers should apear in the wallet any moment (it might take up to a few minutes). You can check progress here: " + "</br></br>" + "<a href=\"" + etherscan + "\" target=\"_blank\">" + etherscan + "</a>");
         $("#generalModal").modal('show');
       }
-
 
     });
   },
 
-  displayNoWalletModal: function(){
-        $("#modalTitle").html("This application works only in Ropsten Test Network");
-        $("#modalText").html("Make sure your Ethereum client(MetaMask or Misk browser) is configured correctly and switched to Ropsten test network.");
-        $("#generalModal").modal('show');
+  displayNoWalletModal: function () {
+    $("#modalTitle").html("This application works only in Ropsten Test Network");
+    $("#modalText").html("Make sure your Ethereum client(MetaMask or Misk browser) is configured correctly and switched to Ropsten test network.");
+    $("#generalModal").modal('show');
   }
-  
+
 };
 
 window.addEventListener('load', function () {
@@ -160,27 +186,17 @@ window.addEventListener('load', function () {
   if (typeof web3 !== 'undefined') {
     window.web3 = new Web3(web3.currentProvider);
 
-    web3.version.getNetwork((err, netId) => {
-      switch (netId) {
-        case "3":
-          console.log('This is the ropsten test network.')
-          break
-        default:
-          App.displayNoWalletModal();
-      }
-    })
-
     web3.version.getNetwork(function (err, netId) {
       switch (netId) {
         case "3":
-          console.log('This is the ropsten test network.')
+          //console.log('This is the ropsten test network.')
           break
         default:
           App.displayNoWalletModal();
       }
     })
 
-    
+
 
   } else {
     App.displayNoWalletModal();
