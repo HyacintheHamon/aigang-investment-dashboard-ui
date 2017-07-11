@@ -1,0 +1,104 @@
+<!DOCTYPE html><html lang="en"><head><title></title><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="format-detection" content="telephone=no"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content=""><link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico"><link href="http://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&amp;subset=cyrillic-ext,latin-ext" rel="stylesheet"><link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"><link rel="stylesheet" href="./css/style.min.201707112128.css"><script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script><script src="http://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script><script src="https://cdn.rawgit.com/ethereum/web3.js/develop/dist/web3.js"></script></head><body class="template-investment"><header class="site-header"><div class="container"><div class="trow trow-vmiddle"><div class="trow-min"><a href="/" class="site-logo"><!-- --></a></div><div class="text-xs-right text-sm-center"><span class="site-header-page-title">Investment </span><small><span class="text-muted">Demo</span></small></div></div></div></header><main class="site-main"><article class="site-article"><div class="container"><div class="panel panel-brand-bg"><div class="panel-split panel-split__inv"><div class="panel-split-column panel-split-column__inv1"><ul class="list-group list-group-trans"><li class="list-group-item list-group-item__inv1"><span><i class="cc-ETH"></i> <span class="text-muted small">ethereum</span></span></li><li class="list-group-item list-group-item__inv2"><p id="wallet_address">0x 0000 0000 0000 0000 0000 0000 0000 0000 0000 0000</p><span class="text-muted">Ethereum id <small>(Ropsten Test Net)</small></span></li><li class="list-group-item list-group-item__inv3"><span id="wallet_balance" class="badge badge-lg badge-trans">N/A</span> <span class="text-muted">Your balance</span></li><li class="list-group-item list-group-item__inv4"><span class="badge badge-trans" id="invested">N/A</span><p><span class="text-muted">Invested</span></p><span class="badge badge-trans" id="projectedProfit">N/A</span><p><span class="text-muted">Projected revenue</span></p></li></ul></div><div class="panel-split-column panel-split-column__inv2"><div class="panel-body"><div class="canvas-wrapper"><canvas id="canvas"></canvas></div><script>function createChart() {
+
+										var ctx = document.getElementById("canvas").getContext('2d');
+
+										if (typeof window.myChart != 'undefined') {
+											window.myChart.destroy();
+										}
+
+										window.myChart = new Chart(ctx, {
+
+											responsive: true,
+
+											type: 'line',
+
+											data: {
+												labels: ["Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan", "Feb", "Mar", "Apr"],
+												datasets: [{
+													label: '',
+													data: [0, 75, 50, 75, 40, 60, 35, 80, 150, 125, 210],
+													backgroundColor: 'transparent',
+													borderColor: '#fff',
+													borderWidth: 8
+												}]
+											},
+
+											options: {
+
+												maintainAspectRatio: false,
+
+												elements: {
+													point: {
+														radius: 0
+													}
+												},
+
+												legend: {
+
+													display: false
+
+												},
+
+												scales: {
+
+													yAxes: [{
+														gridLines: {
+															zeroLineColor: "rgba(255,255,255,0.6)",
+															drawBorder: false,
+															color: ['rgba(255,255,255,0.0)', 'rgba(255,255,255,0.1)', 'rgba(255,255,255,0.2)', 'rgba(255,255,255,0.3)', 'rgba(255,255,255,0.4)', 'rgba(255,255,255,0.5)']
+														},
+														position: "right",
+														ticks: {
+															fontColor: "#48cedc",
+															stepSize: 50,
+															fontSize: getViewportWidth() <= 1024 ? 12 : 14,
+															padding: 15,
+															beginAtZero: true
+														}
+													}],
+
+													xAxes: [{
+														gridLines: {
+															zeroLineColor: "rgba(255,255,255,0)",
+															drawBorder: false,
+															color: ['rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)', 'rgba(255,255,255,0)']
+														},
+														ticks: {
+															fontFamily: "Noto Sans",
+															fontColor: "#48cedc",
+															fontSize: getViewportWidth() <= 1024 ? 12 : 14,
+															stepSize: 1,
+															beginAtZero: true
+														}
+													}]
+
+												},
+
+												steppedLine: false
+
+											}
+
+										});
+
+									}
+
+
+
+
+
+									$(document).ready(function () {
+										createChart();
+									});
+
+									var resizeTimer;
+
+									$(window).on('resize', function (e) {
+
+										clearTimeout(resizeTimer);
+										resizeTimer = setTimeout(function () {
+
+											createChart();
+
+										}, 250);
+
+									});</script></div></div></div></div><div class="panel panel-default"><div class="panel-body"><div class="row"><div class="col-xs-12 col-sm-4"><!--TODO: ADD this number to contract--><p><span>Total insurance products</span> <span class="text-primary">1</span></p><p><span>Total policies</span> <span id="totalInsurers" class="text-primary">N/A</span></p></div><div class="col-xs-12 col-sm-4"><!--TODO: Implement reserves in contract--><p><span>Total invested amount</span> <span id="totalInvestedAmount" class="text-primary">N/A</span></p><p><span>Total amount in reserves</span> <span id="totalContractBalance" class="text-primary">N/A</span></p></div><div class="col-xs-12 col-sm-4"><p><span>Total amount paid for battery insurance</span> <span id="totalClaimsPaid" class="text-primary">N/A</span></p><p><span>Total investors</span> <span id="totalInvestorsCount" class="text-primary">N/A</span></p></div></div></div></div><div class="panel panel-default"><div class="table-responsive"><table class="table"><thead><tr><th valign="top">ID</th><th valign="top">Insurance<br>type</th><th valign="top">Investors<br></th><th valign="top">Policies<br></th><th valign="top">Invested<br>amount</th><th valign="top">Amount paid<br>for insurance</th><th valign="top">Predicted<br>profit</th><th valign="top" width="10%"></th></tr></thead><tbody><tr><td valign="middle"><span class="text-primary-2">258414</span></td><td valign="middle">Phone battery</td><td valign="middle" id="totalInvestorsCount_table">N/A</td><td valign="middle" id="totalInsurers_table">N/A</td><!--TODO: Implement reserves in contract--><td valign="middle" id="totalInvestedAmount_table">N/A</td><td valign="middle" id="totalClaimsPaid_table">N/A</td><td valign="middle" id="predictedProfit_table">N/A</td><td class="cell-btn text-right has-table-control" valign="middle"><button data-click="show-amount-form" class="btn btn-sm btn-primary">INVEST</button><div class="table-control"><div class="trow trow-vmiddle"><div><label>Select amount to invest</label></div><div class="table-control-input"><div class="input-group input-group-sm"><input id="enterValue" type="text" class="form-control" value="0.1" placeholder=""> <span class="input-group-btn"><!--<button data-toggle="modal" data-target="#myModal" data-click="submit-amount-form" class="btn btn-default" type="button">SUBMIT</button>	--> <button data-toggle="modal" data-click="submit-amount-form" class="btn btn-default" type="button">SUBMIT</button></span></div></div></div></div></td></tr><tr class="info"><td valign="middle"><span class="text-primary-2">258415</span></td><td valign="middle">Drone</td><td valign="middle"></td><td valign="middle">-</td><td valign="middle">-</td><td valign="middle">-</td><td valign="middle">-</td><td class="cell-btn text-right has-table-control" valign="middle"><span class="btn btn-m btn-dashed">Coming soon</span></td></tr><tr class="info"><td valign="middle"><span class="text-primary-2">258416</span></td><td valign="middle">Smart car</td><td valign="middle"></td><td valign="middle">-</td><td valign="middle">-</td><td valign="middle">-</td><td valign="middle">-</td><td class="cell-btn text-right has-table-control" valign="middle"><span class="btn btn-m btn-dashed">Coming soon</span></td></tr></tbody></table></div><!-- Modals --><div id="generalModal" class="modal fade" role="dialog"><div class="modal-dialog modal-sm"><!-- Modal content--><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><h3 id="modalTitle" class="text-primary-2 text-center"></h3><p id="modalText" style="word-wrap: break-word" class="text-center"></p></div></div></div></div></div></div></article></main><footer class="site-footer"><div class="container"></div></footer><script src="./js/app.min.201707112128.js"></script><script src="./js/site-scripts.min.201707112128.js"></script></body></html>
