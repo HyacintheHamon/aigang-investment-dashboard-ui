@@ -24,7 +24,7 @@ var dest_folder_build = 'build';
 
 
 
-var version = '201707112128'
+var version = '201707121423'
 
 
 

@@ -1,57 +1,57 @@
 
 function b64EncodeUnicode(str) {
-    return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function(match, p1) {
-        return String.fromCharCode('0x' + p1);
-    }));
+  return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g, function (match, p1) {
+    return String.fromCharCode('0x' + p1);
+  }));
 }
 
 function b64DecodeUnicode(str) {
-    return decodeURIComponent(Array.prototype.map.call(atob(str), function(c) {
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-    }).join(''));
+  return decodeURIComponent(Array.prototype.map.call(atob(str), function (c) {
+    return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+  }).join(''));
 }
 
 
 function getViewportWidth() {
-	return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  return Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 }
 
 function getViewportHeight() {
-	return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+  return Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 }
 
 function get_ie_version() {
-	
-    "use strict";
 
-    var ret, isTheBrowser,
-        actualVersion,
-        jscriptMap, jscriptVersion;
+  "use strict";
 
-    isTheBrowser = false;
-    jscriptMap = {
-        "5.5": "5.5",
-        "5.6": "6",
-        "5.7": "7",
-        "5.8": "8",
-        "9": "9",
-        "10": "10"
-    };
-	
-    jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
+  var ret, isTheBrowser,
+    actualVersion,
+    jscriptMap, jscriptVersion;
 
-    if (jscriptVersion !== undefined) {
-        isTheBrowser = true;
-        actualVersion = jscriptMap[jscriptVersion];
-    }
+  isTheBrowser = false;
+  jscriptMap = {
+    "5.5": "5.5",
+    "5.6": "6",
+    "5.7": "7",
+    "5.8": "8",
+    "9": "9",
+    "10": "10"
+  };
 
-    ret = {
-        isTheBrowser: isTheBrowser,
-        actualVersion: actualVersion
-    };
+  jscriptVersion = new Function("/*@cc_on return @_jscript_version; @*/")();
 
-    return ret;
-	
+  if (jscriptVersion !== undefined) {
+    isTheBrowser = true;
+    actualVersion = jscriptMap[jscriptVersion];
+  }
+
+  ret = {
+    isTheBrowser: isTheBrowser,
+    actualVersion: actualVersion
+  };
+
+  return ret;
+
 }
 
 
@@ -71,7 +71,7 @@ function get_ie_version() {
   // ======================
 
   var dismiss = '[data-dismiss="alert"]'
-  var Alert   = function (el) {
+  var Alert = function (el) {
     $(el).on('click', dismiss, this.close)
   }
 
@@ -80,7 +80,7 @@ function get_ie_version() {
   Alert.TRANSITION_DURATION = 150
 
   Alert.prototype.close = function (e) {
-    var $this    = $(this)
+    var $this = $(this)
     var selector = $this.attr('data-target')
 
     if (!selector) {
@@ -121,7 +121,7 @@ function get_ie_version() {
   function Plugin(option) {
     return this.each(function () {
       var $this = $(this)
-      var data  = $this.data('bs.alert')
+      var data = $this.data('bs.alert')
 
       if (!data) $this.data('bs.alert', (data = new Alert(this)))
       if (typeof option == 'string') data[option].call($this)
@@ -130,7 +130,7 @@ function get_ie_version() {
 
   var old = $.fn.alert
 
-  $.fn.alert             = Plugin
+  $.fn.alert = Plugin
   $.fn.alert.Constructor = Alert
 
 
@@ -166,21 +166,21 @@ function get_ie_version() {
   // ==============================
 
   var Button = function (element, options) {
-    this.$element  = $(element)
-    this.options   = $.extend({}, Button.DEFAULTS, options)
+    this.$element = $(element)
+    this.options = $.extend({}, Button.DEFAULTS, options)
     this.isLoading = false
   }
 
-  Button.VERSION  = '3.3.7'
+  Button.VERSION = '3.3.7'
 
   Button.DEFAULTS = {
     loadingText: 'loading...'
   }
 
   Button.prototype.setState = function (state) {
-    var d    = 'disabled'
-    var $el  = this.$element
-    var val  = $el.is('input') ? 'val' : 'html'
+    var d = 'disabled'
+    var $el = this.$element
+    var val = $el.is('input') ? 'val' : 'html'
     var data = $el.data()
 
     state += 'Text'
@@ -229,8 +229,8 @@ function get_ie_version() {
 
   function Plugin(option) {
     return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.button')
+      var $this = $(this)
+      var data = $this.data('bs.button')
       var options = typeof option == 'object' && option
 
       if (!data) $this.data('bs.button', (data = new Button(this, options)))
@@ -242,7 +242,7 @@ function get_ie_version() {
 
   var old = $.fn.button
 
-  $.fn.button             = Plugin
+  $.fn.button = Plugin
   $.fn.button.Constructor = Button
 
 
@@ -293,10 +293,10 @@ function get_ie_version() {
   // ================================
 
   var Collapse = function (element, options) {
-    this.$element      = $(element)
-    this.options       = $.extend({}, Collapse.DEFAULTS, options)
-    this.$trigger      = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
-                           '[data-toggle="collapse"][data-target="#' + element.id + '"]')
+    this.$element = $(element)
+    this.options = $.extend({}, Collapse.DEFAULTS, options)
+    this.$trigger = $('[data-toggle="collapse"][href="#' + element.id + '"],' +
+      '[data-toggle="collapse"][data-target="#' + element.id + '"]')
     this.transitioning = null
 
     if (this.options.parent) {
@@ -308,7 +308,7 @@ function get_ie_version() {
     if (this.options.toggle) this.toggle()
   }
 
-  Collapse.VERSION  = '3.3.7'
+  Collapse.VERSION = '3.3.7'
 
   Collapse.TRANSITION_DURATION = 350
 
@@ -405,7 +405,7 @@ function get_ie_version() {
     if (!$.support.transition) return complete.call(this)
 
     this.$element
-      [dimension](0)
+    [dimension](0)
       .one('bsTransitionEnd', $.proxy(complete, this))
       .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
   }
@@ -447,8 +447,8 @@ function get_ie_version() {
 
   function Plugin(option) {
     return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.collapse')
+      var $this = $(this)
+      var data = $this.data('bs.collapse')
       var options = $.extend({}, Collapse.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
       if (!data && options.toggle && /show|hide/.test(option)) options.toggle = false
@@ -459,7 +459,7 @@ function get_ie_version() {
 
   var old = $.fn.collapse
 
-  $.fn.collapse             = Plugin
+  $.fn.collapse = Plugin
   $.fn.collapse.Constructor = Collapse
 
 
@@ -476,13 +476,13 @@ function get_ie_version() {
   // =================
 
   $(document).on('click.bs.collapse.data-api', '[data-toggle="collapse"]', function (e) {
-    var $this   = $(this)
+    var $this = $(this)
 
     if (!$this.attr('data-target')) e.preventDefault()
 
     var $target = getTargetFromTrigger($this)
-    var data    = $target.data('bs.collapse')
-    var option  = data ? 'toggle' : $this.data()
+    var data = $target.data('bs.collapse')
+    var option = data ? 'toggle' : $this.data()
 
     Plugin.call($target, option)
   })
@@ -505,7 +505,7 @@ function get_ie_version() {
   // =========================
 
   var backdrop = '.dropdown-backdrop'
-  var toggle   = '[data-toggle="dropdown"]'
+  var toggle = '[data-toggle="dropdown"]'
   var Dropdown = function (element) {
     $(element).on('click.bs.dropdown', this.toggle)
   }
@@ -529,8 +529,8 @@ function get_ie_version() {
     if (e && e.which === 3) return
     $(backdrop).remove()
     $(toggle).each(function () {
-      var $this         = $(this)
-      var $parent       = getParent($this)
+      var $this = $(this)
+      var $parent = getParent($this)
       var relatedTarget = { relatedTarget: this }
 
       if (!$parent.hasClass('open')) return
@@ -551,7 +551,7 @@ function get_ie_version() {
 
     if ($this.is('.disabled, :disabled')) return
 
-    var $parent  = getParent($this)
+    var $parent = getParent($this)
     var isActive = $parent.hasClass('open')
 
     clearMenus()
@@ -592,7 +592,7 @@ function get_ie_version() {
 
     if ($this.is('.disabled, :disabled')) return
 
-    var $parent  = getParent($this)
+    var $parent = getParent($this)
     var isActive = $parent.hasClass('open')
 
     if (!isActive && e.which != 27 || isActive && e.which == 27) {
@@ -607,9 +607,9 @@ function get_ie_version() {
 
     var index = $items.index(e.target)
 
-    if (e.which == 38 && index > 0)                 index--         // up
+    if (e.which == 38 && index > 0) index--         // up
     if (e.which == 40 && index < $items.length - 1) index++         // down
-    if (!~index)                                    index = 0
+    if (!~index) index = 0
 
     $items.eq(index).trigger('focus')
   }
@@ -621,7 +621,7 @@ function get_ie_version() {
   function Plugin(option) {
     return this.each(function () {
       var $this = $(this)
-      var data  = $this.data('bs.dropdown')
+      var data = $this.data('bs.dropdown')
 
       if (!data) $this.data('bs.dropdown', (data = new Dropdown(this)))
       if (typeof option == 'string') data[option].call($this)
@@ -630,7 +630,7 @@ function get_ie_version() {
 
   var old = $.fn.dropdown
 
-  $.fn.dropdown             = Plugin
+  $.fn.dropdown = Plugin
   $.fn.dropdown.Constructor = Dropdown
 
 
@@ -671,14 +671,14 @@ function get_ie_version() {
   // ======================
 
   var Modal = function (element, options) {
-    this.options             = options
-    this.$body               = $(document.body)
-    this.$element            = $(element)
-    this.$dialog             = this.$element.find('.modal-dialog')
-    this.$backdrop           = null
-    this.isShown             = null
-    this.originalBodyPad     = null
-    this.scrollbarWidth      = 0
+    this.options = options
+    this.$body = $(document.body)
+    this.$element = $(element)
+    this.$dialog = this.$element.find('.modal-dialog')
+    this.$backdrop = null
+    this.isShown = null
+    this.originalBodyPad = null
+    this.scrollbarWidth = 0
     this.ignoreBackdropClick = false
 
     if (this.options.remote) {
@@ -690,7 +690,7 @@ function get_ie_version() {
     }
   }
 
-  Modal.VERSION  = '3.3.7'
+  Modal.VERSION = '3.3.7'
 
   Modal.TRANSITION_DURATION = 300
   Modal.BACKDROP_TRANSITION_DURATION = 150
@@ -707,7 +707,7 @@ function get_ie_version() {
 
   Modal.prototype.show = function (_relatedTarget) {
     var that = this
-    var e    = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
+    var e = $.Event('show.bs.modal', { relatedTarget: _relatedTarget })
 
     this.$element.trigger(e)
 
@@ -798,8 +798,8 @@ function get_ie_version() {
       .off('focusin.bs.modal') // guard against infinite focus loop
       .on('focusin.bs.modal', $.proxy(function (e) {
         if (document !== e.target &&
-            this.$element[0] !== e.target &&
-            !this.$element.has(e.target).length) {
+          this.$element[0] !== e.target &&
+          !this.$element.has(e.target).length) {
           this.$element.trigger('focus')
         }
       }, this))
@@ -901,7 +901,7 @@ function get_ie_version() {
     var modalIsOverflowing = this.$element[0].scrollHeight > document.documentElement.clientHeight
 
     this.$element.css({
-      paddingLeft:  !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
+      paddingLeft: !this.bodyIsOverflowing && modalIsOverflowing ? this.scrollbarWidth : '',
       paddingRight: this.bodyIsOverflowing && !modalIsOverflowing ? this.scrollbarWidth : ''
     })
   }
@@ -948,8 +948,8 @@ function get_ie_version() {
 
   function Plugin(option, _relatedTarget) {
     return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.modal')
+      var $this = $(this)
+      var data = $this.data('bs.modal')
       var options = $.extend({}, Modal.DEFAULTS, $this.data(), typeof option == 'object' && option)
 
       if (!data) $this.data('bs.modal', (data = new Modal(this, options)))
@@ -960,7 +960,7 @@ function get_ie_version() {
 
   var old = $.fn.modal
 
-  $.fn.modal             = Plugin
+  $.fn.modal = Plugin
   $.fn.modal.Constructor = Modal
 
 
@@ -977,10 +977,10 @@ function get_ie_version() {
   // ==============
 
   $(document).on('click.bs.modal.data-api', '[data-toggle="modal"]', function (e) {
-    var $this   = $(this)
-    var href    = $this.attr('href')
+    var $this = $(this)
+    var href = $this.attr('href')
     var $target = $($this.attr('data-target') || (href && href.replace(/.*(?=#[^\s]+$)/, ''))) // strip for ie7
-    var option  = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
+    var option = $target.data('bs.modal') ? 'toggle' : $.extend({ remote: !/#/.test(href) && href }, $target.data(), $this.data())
 
     if ($this.is('a')) e.preventDefault()
 
@@ -1021,8 +1021,8 @@ function get_ie_version() {
   Tab.TRANSITION_DURATION = 150
 
   Tab.prototype.show = function () {
-    var $this    = this.element
-    var $ul      = $this.closest('ul:not(.dropdown-menu)')
+    var $this = this.element
+    var $ul = $this.closest('ul:not(.dropdown-menu)')
     var selector = $this.data('target')
 
     if (!selector) {
@@ -1061,7 +1061,7 @@ function get_ie_version() {
   }
 
   Tab.prototype.activate = function (element, container, callback) {
-    var $active    = container.find('> .active')
+    var $active = container.find('> .active')
     var transition = callback
       && $.support.transition
       && ($active.length && $active.hasClass('fade') || !!container.find('> .fade').length)
@@ -1070,15 +1070,15 @@ function get_ie_version() {
       $active
         .removeClass('active')
         .find('> .dropdown-menu > .active')
-          .removeClass('active')
+        .removeClass('active')
         .end()
         .find('[data-toggle="tab"]')
-          .attr('aria-expanded', false)
+        .attr('aria-expanded', false)
 
       element
         .addClass('active')
         .find('[data-toggle="tab"]')
-          .attr('aria-expanded', true)
+        .attr('aria-expanded', true)
 
       if (transition) {
         element[0].offsetWidth // reflow for transition
@@ -1090,10 +1090,10 @@ function get_ie_version() {
       if (element.parent('.dropdown-menu').length) {
         element
           .closest('li.dropdown')
-            .addClass('active')
+          .addClass('active')
           .end()
           .find('[data-toggle="tab"]')
-            .attr('aria-expanded', true)
+          .attr('aria-expanded', true)
       }
 
       callback && callback()
@@ -1115,7 +1115,7 @@ function get_ie_version() {
   function Plugin(option) {
     return this.each(function () {
       var $this = $(this)
-      var data  = $this.data('bs.tab')
+      var data = $this.data('bs.tab')
 
       if (!data) $this.data('bs.tab', (data = new Tab(this)))
       if (typeof option == 'string') data[option]()
@@ -1124,7 +1124,7 @@ function get_ie_version() {
 
   var old = $.fn.tab
 
-  $.fn.tab             = Plugin
+  $.fn.tab = Plugin
   $.fn.tab.Constructor = Tab
 
 
@@ -1168,18 +1168,18 @@ function get_ie_version() {
   // ===============================
 
   var Tooltip = function (element, options) {
-    this.type       = null
-    this.options    = null
-    this.enabled    = null
-    this.timeout    = null
+    this.type = null
+    this.options = null
+    this.enabled = null
+    this.timeout = null
     this.hoverState = null
-    this.$element   = null
-    this.inState    = null
+    this.$element = null
+    this.inState = null
 
     this.init('tooltip', element, options)
   }
 
-  Tooltip.VERSION  = '3.3.7'
+  Tooltip.VERSION = '3.3.7'
 
   Tooltip.TRANSITION_DURATION = 150
 
@@ -1200,12 +1200,12 @@ function get_ie_version() {
   }
 
   Tooltip.prototype.init = function (type, element, options) {
-    this.enabled   = true
-    this.type      = type
-    this.$element  = $(element)
-    this.options   = this.getOptions(options)
+    this.enabled = true
+    this.type = type
+    this.$element = $(element)
+    this.options = this.getOptions(options)
     this.$viewport = this.options.viewport && $($.isFunction(this.options.viewport) ? this.options.viewport.call(this, this.$element) : (this.options.viewport.selector || this.options.viewport))
-    this.inState   = { click: false, hover: false, focus: false }
+    this.inState = { click: false, hover: false, focus: false }
 
     if (this.$element[0] instanceof document.constructor && !this.options.selector) {
       throw new Error('`selector` option must be specified when initializing ' + this.type + ' on the window.document object!')
@@ -1219,10 +1219,10 @@ function get_ie_version() {
       if (trigger == 'click') {
         this.$element.on('click.' + this.type, this.options.selector, $.proxy(this.toggle, this))
       } else if (trigger != 'manual') {
-        var eventIn  = trigger == 'hover' ? 'mouseenter' : 'focusin'
+        var eventIn = trigger == 'hover' ? 'mouseenter' : 'focusin'
         var eventOut = trigger == 'hover' ? 'mouseleave' : 'focusout'
 
-        this.$element.on(eventIn  + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
+        this.$element.on(eventIn + '.' + this.type, this.options.selector, $.proxy(this.enter, this))
         this.$element.on(eventOut + '.' + this.type, this.options.selector, $.proxy(this.leave, this))
       }
     }
@@ -1250,7 +1250,7 @@ function get_ie_version() {
   }
 
   Tooltip.prototype.getDelegateOptions = function () {
-    var options  = {}
+    var options = {}
     var defaults = this.getDefaults()
 
     this._options && $.each(this._options, function (key, value) {
@@ -1360,19 +1360,19 @@ function get_ie_version() {
       this.options.container ? $tip.appendTo(this.options.container) : $tip.insertAfter(this.$element)
       this.$element.trigger('inserted.bs.' + this.type)
 
-      var pos          = this.getPosition()
-      var actualWidth  = $tip[0].offsetWidth
+      var pos = this.getPosition()
+      var actualWidth = $tip[0].offsetWidth
       var actualHeight = $tip[0].offsetHeight
 
       if (autoPlace) {
         var orgPlacement = placement
         var viewportDim = this.getPosition(this.$viewport)
 
-        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top'    :
-                    placement == 'top'    && pos.top    - actualHeight < viewportDim.top    ? 'bottom' :
-                    placement == 'right'  && pos.right  + actualWidth  > viewportDim.width  ? 'left'   :
-                    placement == 'left'   && pos.left   - actualWidth  < viewportDim.left   ? 'right'  :
-                    placement
+        placement = placement == 'bottom' && pos.bottom + actualHeight > viewportDim.bottom ? 'top' :
+          placement == 'top' && pos.top - actualHeight < viewportDim.top ? 'bottom' :
+            placement == 'right' && pos.right + actualWidth > viewportDim.width ? 'left' :
+              placement == 'left' && pos.left - actualWidth < viewportDim.left ? 'right' :
+                placement
 
         $tip
           .removeClass(orgPlacement)
@@ -1400,8 +1400,8 @@ function get_ie_version() {
   }
 
   Tooltip.prototype.applyPlacement = function (offset, placement) {
-    var $tip   = this.tip()
-    var width  = $tip[0].offsetWidth
+    var $tip = this.tip()
+    var width = $tip[0].offsetWidth
     var height = $tip[0].offsetHeight
 
     // manually read margins because getBoundingClientRect includes difference
@@ -1409,10 +1409,10 @@ function get_ie_version() {
     var marginLeft = parseInt($tip.css('margin-left'), 10)
 
     // we must check for NaN for ie 8/9
-    if (isNaN(marginTop))  marginTop  = 0
+    if (isNaN(marginTop)) marginTop = 0
     if (isNaN(marginLeft)) marginLeft = 0
 
-    offset.top  += marginTop
+    offset.top += marginTop
     offset.left += marginLeft
 
     // $.fn.offset doesn't round pixel values
@@ -1429,7 +1429,7 @@ function get_ie_version() {
     $tip.addClass('in')
 
     // check to see if placing tip in new offset caused the tip to resize itself
-    var actualWidth  = $tip[0].offsetWidth
+    var actualWidth = $tip[0].offsetWidth
     var actualHeight = $tip[0].offsetHeight
 
     if (placement == 'top' && actualHeight != height) {
@@ -1441,8 +1441,8 @@ function get_ie_version() {
     if (delta.left) offset.left += delta.left
     else offset.top += delta.top
 
-    var isVertical          = /top|bottom/.test(placement)
-    var arrowDelta          = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
+    var isVertical = /top|bottom/.test(placement)
+    var arrowDelta = isVertical ? delta.left * 2 - width + actualWidth : delta.top * 2 - height + actualHeight
     var arrowOffsetPosition = isVertical ? 'offsetWidth' : 'offsetHeight'
 
     $tip.offset(offset)
@@ -1456,7 +1456,7 @@ function get_ie_version() {
   }
 
   Tooltip.prototype.setContent = function () {
-    var $tip  = this.tip()
+    var $tip = this.tip()
     var title = this.getTitle()
 
     $tip.find('.tooltip-inner')[this.options.html ? 'html' : 'text'](title)
@@ -1466,7 +1466,7 @@ function get_ie_version() {
   Tooltip.prototype.hide = function (callback) {
     var that = this
     var $tip = $(this.$tip)
-    var e    = $.Event('hide.bs.' + this.type)
+    var e = $.Event('hide.bs.' + this.type)
 
     function complete() {
       if (that.hoverState != 'in') $tip.detach()
@@ -1507,12 +1507,12 @@ function get_ie_version() {
   }
 
   Tooltip.prototype.getPosition = function ($element) {
-    $element   = $element || this.$element
+    $element = $element || this.$element
 
-    var el     = $element[0]
+    var el = $element[0]
     var isBody = el.tagName == 'BODY'
 
-    var elRect    = el.getBoundingClientRect()
+    var elRect = el.getBoundingClientRect()
     if (elRect.width == null) {
       // width and height are missing in IE8, so compute them manually; see https://github.com/twbs/bootstrap/issues/14093
       elRect = $.extend({}, elRect, { width: elRect.right - elRect.left, height: elRect.bottom - elRect.top })
@@ -1520,17 +1520,17 @@ function get_ie_version() {
     var isSvg = window.SVGElement && el instanceof window.SVGElement
     // Avoid using $.offset() on SVGs since it gives incorrect results in jQuery 3.
     // See https://github.com/twbs/bootstrap/issues/20280
-    var elOffset  = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset())
-    var scroll    = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
+    var elOffset = isBody ? { top: 0, left: 0 } : (isSvg ? null : $element.offset())
+    var scroll = { scroll: isBody ? document.documentElement.scrollTop || document.body.scrollTop : $element.scrollTop() }
     var outerDims = isBody ? { width: $(window).width(), height: $(window).height() } : null
 
     return $.extend({}, elRect, scroll, outerDims, elOffset)
   }
 
   Tooltip.prototype.getCalculatedOffset = function (placement, pos, actualWidth, actualHeight) {
-    return placement == 'bottom' ? { top: pos.top + pos.height,   left: pos.left + pos.width / 2 - actualWidth / 2 } :
-           placement == 'top'    ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
-           placement == 'left'   ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
+    return placement == 'bottom' ? { top: pos.top + pos.height, left: pos.left + pos.width / 2 - actualWidth / 2 } :
+      placement == 'top' ? { top: pos.top - actualHeight, left: pos.left + pos.width / 2 - actualWidth / 2 } :
+        placement == 'left' ? { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth } :
         /* placement == 'right' */ { top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width }
 
   }
@@ -1543,7 +1543,7 @@ function get_ie_version() {
     var viewportDimensions = this.getPosition(this.$viewport)
 
     if (/right|left/.test(placement)) {
-      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
+      var topEdgeOffset = pos.top - viewportPadding - viewportDimensions.scroll
       var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
       if (topEdgeOffset < viewportDimensions.top) { // top overflow
         delta.top = viewportDimensions.top - topEdgeOffset
@@ -1551,7 +1551,7 @@ function get_ie_version() {
         delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
       }
     } else {
-      var leftEdgeOffset  = pos.left - viewportPadding
+      var leftEdgeOffset = pos.left - viewportPadding
       var rightEdgeOffset = pos.left + viewportPadding + actualWidth
       if (leftEdgeOffset < viewportDimensions.left) { // left overflow
         delta.left = viewportDimensions.left - leftEdgeOffset
@@ -1566,10 +1566,10 @@ function get_ie_version() {
   Tooltip.prototype.getTitle = function () {
     var title
     var $e = this.$element
-    var o  = this.options
+    var o = this.options
 
     title = $e.attr('data-original-title')
-      || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
+      || (typeof o.title == 'function' ? o.title.call($e[0]) : o.title)
 
     return title
   }
@@ -1646,8 +1646,8 @@ function get_ie_version() {
 
   function Plugin(option) {
     return this.each(function () {
-      var $this   = $(this)
-      var data    = $this.data('bs.tooltip')
+      var $this = $(this)
+      var data = $this.data('bs.tooltip')
       var options = typeof option == 'object' && option
 
       if (!data && /destroy|hide/.test(option)) return
@@ -1658,7 +1658,7 @@ function get_ie_version() {
 
   var old = $.fn.tooltip
 
-  $.fn.tooltip             = Plugin
+  $.fn.tooltip = Plugin
   $.fn.tooltip.Constructor = Tooltip
 
 
@@ -1673,89 +1673,92 @@ function get_ie_version() {
 }(jQuery);
 
 
-$(function() {
+$(function () {
 
-	$(document).ready(function(){
-		
-		var ie_version = get_ie_version();
+  $(document).ready(function () {
+    var ie_version = get_ie_version();
 
-		if (ie_version.isTheBrowser == true && ie_version.actualVersion <= 10) {
-			
-			$('html').addClass('is-old-ie');
-			
-			$('body').prepend('<div class="old-ie-warning">If you want to use this web site you should update yout browser: <a target="_blank" href="http://outdatedbrowser.com/en">http://outdatedbrowser.com/en</a></div>');
-			
-		}
-				
-		if( /Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent) ) {
-			$('html').addClass('is-mobile-browser');
-		}
-		
-		
-		//
-		// laukelis su kalendoriumi
-		//
-		if ($('.datepicker').length > 0) {
-			
-			$('.datepicker').each(function(i,o){
-			
-				$('.datepicker').datepicker({
-					'language': $(o).attr('data-language')
-				});
+    if (ie_version.isTheBrowser == true && ie_version.actualVersion <= 10) {
 
-			});
-			
-		}
-		
-		
-		setTimeout(function(){
-			
-			$('html').removeClass('loading');
-			
-		}, 500);
+      $('html').addClass('is-old-ie');
 
-		
-		
-		
+      $('body').prepend('<div class="old-ie-warning">If you want to use this web site you should update yout browser: <a target="_blank" href="http://outdatedbrowser.com/en">http://outdatedbrowser.com/en</a></div>');
 
-		
-		
-		$(document).on('click', '[data-click="show-amount-form"]', function(){
+    }
 
-			$('.has-table-control').removeClass('table-control-active');
-			
-			$(this).closest('.has-table-control').addClass('table-control-active');   
-				
-		});		
-		
-		
-		
-		$(document).on('click', '[data-click="submit-amount-form"]', function(){
-				
-			$(this).closest('.has-table-control').removeClass('table-control-active');
+    if (/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+      $('html').addClass('is-mobile-browser');
+    }
+
+
+    //
+    // laukelis su kalendoriumi
+    //
+    if ($('.datepicker').length > 0) {
+
+      $('.datepicker').each(function (i, o) {
+
+        $('.datepicker').datepicker({
+          'language': $(o).attr('data-language')
+        });
+
+      });
+
+    }
+
+
+    setTimeout(function () {
+
+      $('html').removeClass('loading');
+
+    }, 500);
+
+
+
+
+
+
+
+    $(document).on('click', '[data-click="show-amount-form"]', function () {
+
+      $('.has-table-control').removeClass('table-control-active');
+
+      $(this).closest('.has-table-control').addClass('table-control-active');
+
+    });
+
+
+
+    $(document).on('click', '[data-click="submit-amount-form"]', function () {
+
+      $(this).closest('.has-table-control').removeClass('table-control-active');
 
       App.investMoney();
-				
-		});		
-		
-		
-		
-		$(document).on('click touchend', function(evt){
 
-				var target = $(evt.target);    
-				
-				if ($(target).parents('.has-table-control').length > 0) {
-					
-					console.log(1);
-					
-				} else {
-					
-					$('.has-table-control').removeClass('table-control-active');
-						
-				}
-				
-		});		
-	});
+    });
+
+
+
+    $(document).on('click touchend', function (evt) {
+
+      var target = $(evt.target);
+
+      if ($(target).parents('.has-table-control').length > 0) {
+
+        console.log(1);
+
+      } else {
+
+        $('.has-table-control').removeClass('table-control-active');
+
+      }
+
+    });
+
+
+
+ 
+  });
 });
 
 

@@ -47,6 +47,7 @@ window.App = {
 
       accounts = accs;
       account = accounts[0];
+      web3.eth.defaultAccount = accounts[0];
 
       var chunkedAcount = chunkWalletAddress(account).join(" ");
 
@@ -146,13 +147,12 @@ window.App = {
 
 
   investMoney: function () {
-
-    //  var self = this;
-
+    var self = this;
     var investValue = $("#enterValue").val();
     var weiValue = web3.toWei(investValue, 'ether');
+    var weiNumber = web3.toBigNumber(weiValue);
 
-    policyContract.invest(weiValue, { gas: 300000, from: account, value: weiValue }, function (err, result) {
+    policyContract.invest(weiValue, { gas: 300000, from: account, value: weiNumber }, function (err, result) {
 
       if (err != null) {
         console.log(err);
@@ -165,7 +165,7 @@ window.App = {
       else {
         var etherscan = "https://ropsten.etherscan.io/tx/" + result;
         $("#modalTitle").html("Investment Successful");
-        $("#modalText").html("Great success! Transaction has been sent. Ethers should apear in the wallet any moment (it might take up to a few minutes). You can check progress here: " + "</br></br>" + "<a href=\"" + etherscan + "\" target=\"_blank\">" + etherscan + "</a>");
+        $("#modalText").html("Great success! Transaction has been sent. Ethers should apear in the wallet any moment (it might take up to a few minutes). You can check progress here: " + "<br /><br />" + "<a class=\"btn-link\" href=\"" + etherscan + "\" target=\"_blank\">" + etherscan + "</a><br /><br />Ethers should appear in the wallet at any moment.");
         $("#generalModal").modal('show');
       }
 

@@ -58,6 +58,8 @@ $(function() {
 		$(document).on('click', '[data-click="submit-amount-form"]', function(){
 				
 			$(this).closest('.has-table-control').removeClass('table-control-active');
+
+			App.investMoney();
 				
 		});		
 		
