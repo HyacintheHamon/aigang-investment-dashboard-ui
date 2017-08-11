@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-KGKXNP7');</script>
-<!-- End Google Tag Manager -->
+	<!-- Google Tag Manager -->
+	<script>
+		(function (w, d, s, l, i) {
+			w[l] = w[l] || []; w[l].push({
+				'gtm.start':
+				new Date().getTime(), event: 'gtm.js'
+			}); var f = d.getElementsByTagName(s)[0],
+				j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+					'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+		})(window, document, 'script', 'dataLayer', 'GTM-KGKXNP7');
+	</script>
+	<!-- End Google Tag Manager -->
 
 
 	<title></title>
@@ -54,6 +60,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 	<main class="site-main">
 		<article class="site-article">
 			<div class="container">
+
+
+
 				<div class="panel panel-brand-bg">
 
 					<div class="panel-split panel-split__inv">
@@ -219,7 +228,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 							<div class="col-xs-12 col-sm-4">
 								<!--TODO: ADD this number to contract-->
-								<p><span>Total insurance products</span> <span class="text-primary">1</span></p>
+								<p><span>Total insurance products</span> <span class="text-primary">2</span></p>
 								<p><span>Total policies</span> <span id="totalInsurers" class="text-primary">N/A</span></p>
 							</div>
 
@@ -256,7 +265,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<th valign="top">Invested<br />amount</th>
 									<th valign="top">Amount paid<br />for the insurance</th>
 									<th valign="top">Predicted<br />profit</th>
+									<th valign="top">Dividends </th>
 									<th valign="top" width="10%"></th>
+
 								</tr>
 							</thead>
 							<tbody>
@@ -264,7 +275,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
 								<tr>
-									<!--https://ropsten.etherscan.io/address/0x554ab5f5fe7006223c2dd321b420e9a05d48ec93-->
 									<td valign="middle"><span class="text-primary-2"><a href="https://ropsten.etherscan.io/address/0x554ab5f5fe7006223c2dd321b420e9a05d48ec93" target="_blank" >0x554a...</a> </span></td>
 									<td valign="middle">Phone battery</td>
 									<td valign="middle" id="totalInvestorsCount_table">N/A</td>
@@ -273,6 +283,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<td valign="middle" id="totalInvestedAmount_table">N/A</td>
 									<td valign="middle" id="totalClaimsPaid_table">N/A</td>
 									<td valign="middle" id="predictedProfit_table">N/A</td>
+									<td class="cell-btn text-right has-table-control" valign="middle">
+										<span class="btn btn-m btn-dashed">Not available</span>
+									</td>
+
+									<td class="cell-btn text-right has-table-control" valign="middle">
+										<span class="btn btn-m btn-dashed">Closed</span>
+									</td>
+
+
+
+								</tr>
+
+
+								<tr>
+									<td valign="middle"><span class="text-primary-2"><a href="https://ropsten.etherscan.io/address/0x554ab5f5fe7006223c2dd321b420e9a05d48ec93" target="_blank" >0x554a...</a> </span></td>
+									<td valign="middle">Phone battery</td>
+									<td valign="middle" id="totalInvestorsCount_table">N/A</td>
+									<td valign="middle" id="totalInsurers_table">N/A</td>
+									<!--TODO: Implement reserves in contract-->
+									<td valign="middle" id="totalInvestedAmount_table">N/A</td>
+									<td valign="middle" id="totalClaimsPaid_table">N/A</td>
+									<td valign="middle" id="predictedProfit_table">N/A</td>
+									<td class="cell-btn text-right has-table-control" valign="middle">
+										<span class="btn btn-m btn-dashed">Not available</span>
+									</td>
+
 									<td class="cell-btn text-right has-table-control" valign="middle">
 
 										<button data-click="show-amount-form" class="btn btn-sm btn-primary">INVEST</button>
@@ -294,8 +330,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 												</div>
 											</div>
 										</div>
+
+
 									</td>
 								</tr>
+
+
 
 
 
@@ -303,6 +343,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<td valign="middle"><span class="text-primary-2">0x...</span></td>
 									<td valign="middle">Drone</td>
 									<td valign="middle"></td>
+									<td valign="middle">-</td>
 									<td valign="middle">-</td>
 									<td valign="middle">-</td>
 									<td valign="middle">-</td>
@@ -317,6 +358,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 									<td valign="middle"><span class="text-primary-2">0x...</span></td>
 									<td valign="middle">Smart car</td>
 									<td valign="middle"></td>
+									<td valign="middle">-</td>
 									<td valign="middle">-</td>
 									<td valign="middle">-</td>
 									<td valign="middle">-</td>
