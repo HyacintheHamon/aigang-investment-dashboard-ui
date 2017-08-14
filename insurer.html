@@ -239,7 +239,7 @@
 							</div>
 
 							<div class="col-xs-12 col-sm-4">
-								<p><span>Total paid for the battery insurance</span> <span id="totalClaimsPaid" class="text-primary">N/A</span></p>
+								<p><span>Total paid for the claims</span> <span id="totalClaimsPaid" class="text-primary">N/A</span></p>
 								<p><span>Total investors</span> <span id="totalInvestorsCount" class="text-primary">N/A</span></p>
 							</div>
 
@@ -265,7 +265,7 @@
 									<th valign="top">Invested<br />amount</th>
 									<th valign="top">Amount paid<br />for the insurance</th>
 									<th valign="top">Predicted<br />profit</th>
-									<th valign="top">Dividends </th>
+									<th valign="top" width="10%">Dividends </th>
 									<th valign="top" width="10%"></th>
 
 								</tr>
@@ -274,7 +274,7 @@
 
 
 
-								<tr>
+								<tr class="info">
 									<td valign="middle"><span class="text-primary-2"><a href="https://ropsten.etherscan.io/address/0x554ab5f5fe7006223c2dd321b420e9a05d48ec93" target="_blank" >0x554a...</a> </span></td>
 									<td valign="middle">Phone battery</td>
 									<td valign="middle" id="totalInvestorsCount_table">N/A</td>
@@ -283,11 +283,9 @@
 									<td valign="middle" id="totalInvestedAmount_table">N/A</td>
 									<td valign="middle" id="totalClaimsPaid_table">N/A</td>
 									<td valign="middle" id="predictedProfit_table">N/A</td>
-									<td class="cell-btn text-right has-table-control" valign="middle">
-										<span class="btn btn-m btn-dashed">Not available</span>
-									</td>
+									<td valign="middle" class="cell-btn text-right has-table-control">Not available</td>
 
-									<td class="cell-btn text-right has-table-control" valign="middle">
+									<td valign="middle" class="cell-btn text-right has-table-control">
 										<span class="btn btn-m btn-dashed">Closed</span>
 									</td>
 
@@ -299,20 +297,20 @@
 								<tr>
 									<td valign="middle"><span class="text-primary-2"><a href="https://ropsten.etherscan.io/address/0x554ab5f5fe7006223c2dd321b420e9a05d48ec93" target="_blank" >0x554a...</a> </span></td>
 									<td valign="middle">Phone battery</td>
-									<td valign="middle" id="totalInvestorsCount_table">N/A</td>
-									<td valign="middle" id="totalInsurers_table">N/A</td>
+									<td valign="middle" id="totalInvestorsCount2_table">N/A</td>
+									<td valign="middle" id="totalInsurers2_table">N/A</td>
 									<!--TODO: Implement reserves in contract-->
-									<td valign="middle" id="totalInvestedAmount_table">N/A</td>
-									<td valign="middle" id="totalClaimsPaid_table">N/A</td>
-									<td valign="middle" id="predictedProfit_table">N/A</td>
-									<td class="cell-btn text-right has-table-control" valign="middle">
-										<span class="btn btn-m btn-dashed">Not available</span>
+									<td valign="middle" id="totalInvestedAmount2_table">N/A</td>
+									<td valign="middle" id="totalClaimsPaid2_table">N/A</td>
+									<td valign="middle" id="predictedProfit2_table">N/A</td>
+									<td valign="middle" id="dividendsDiv" class="cell-btn text-right has-table-control" >
+										<span id="dividendsNotAvailable2" class="btn btn-m btn-dashed">Not available</span>
 									</td>
 
-									<td class="cell-btn text-right has-table-control" valign="middle">
+									<td valign="middle" class="cell-btn text-right has-table-control">
 
 										<button data-click="show-amount-form" class="btn btn-sm btn-primary">INVEST</button>
-
+										
 										<div class="table-control">
 											<div class="trow trow-vmiddle">
 												<div><label>Select amount to invest</label></div>
@@ -322,7 +320,7 @@
 														<input id="enterValue" type="text" class="form-control" value="0.1" placeholder="">
 														<span class="input-group-btn">
 													
-														<!--<button data-toggle="modal" data-target="#myModal" data-click="submit-amount-form" class="btn btn-default" type="button">SUBMIT</button>	-->
+							
 														<button data-toggle="modal" data-click="submit-amount-form" class="btn btn-default" type="button">SUBMIT</button>	
 
 													  </span>

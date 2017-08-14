@@ -1729,14 +1729,21 @@ $(function () {
 
 
 
-    $(document).on('click', '[data-click="submit-amount-form"]', function () {
+    $(document).on('click', '[data-click="get-dividends-modal"]', function () {
 
       $(this).closest('.has-table-control').removeClass('table-control-active');
 
-      App.investMoney();
-
+      App.getDividends();
     });
 
+
+    $(document).on('click', '[data-click="show-amount-form"]', function () {
+
+      $('.has-table-control').removeClass('table-control-active');
+
+      $(this).closest('.has-table-control').addClass('table-control-active');
+
+    });
 
 
     $(document).on('click touchend', function (evt) {
@@ -1757,7 +1764,7 @@ $(function () {
 
 
 
- 
+
   });
 });
 
