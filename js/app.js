@@ -34,27 +34,26 @@ function errorHappened(err) {
   }
 };
 
-function fillform(err, result)
-{
-    if (errorHappened(err)) {
-        return;
-      }
+function fillform(err, result) {
+  if (errorHappened(err)) {
+    return;
+  }
 
-      if (result.length == 0) {
-        App.displayNoWalletModal();
-        return;
-      }
+  if (result.length == 0) {
+    App.displayNoWalletModal();
+    return;
+  }
 
-      this.accounts = result;
-      this.account = accounts[0];
-      web3.eth.defaultAccount = accounts[0];
+  this.accounts = result;
+  this.account = accounts[0];
+  web3.eth.defaultAccount = accounts[0];
 
 
-    App.fillInvestorPart();
-    App.fillInvestorInvestment();
-    App.fillInvestmentsHeader();
-    App.fillTableLine1();
-    App.fillTableLine2();
+  App.fillInvestorPart();
+  App.fillInvestorInvestment();
+  App.fillInvestmentsHeader();
+  App.fillTableLine1();
+  App.fillTableLine2();
 };
 
 
@@ -73,26 +72,26 @@ window.App = {
     var contract_v2 = web3.eth.contract(abi_v2);
     policyContract_v2 = contract_v2.at(contractAddress_v2);
 
- 
+
     web3.eth.getAccounts(fillform);
   },
 
- 
+
 
   fillInvestorPart: function () {
-      var chunkedAcount = chunkWalletAddress(account).join(" ");
+    var chunkedAcount = chunkWalletAddress(account).join(" ");
 
-      $("#wallet_address").html(chunkedAcount);
+    $("#wallet_address").html(chunkedAcount);
 
-      web3.eth.getBalance(account, function (err, result) {
-        if (!err) {
-          var value = web3.fromWei(result.toNumber(), 'ether');
-          $("#wallet_balance").html(value);
-        } else {
-          console.log(err);
-          alert("There was an error fetching contract.");
-        }
-      });
+    web3.eth.getBalance(account, function (err, result) {
+      if (!err) {
+        var value = web3.fromWei(result.toNumber(), 'ether');
+        $("#wallet_balance").html(value);
+      } else {
+        console.log(err);
+        alert("There was an error fetching contract.");
+      }
+    });
   },
 
 
@@ -126,7 +125,7 @@ window.App = {
       });
     });
 
-//{from: account} , 
+    //{from: account} , 
     policyContract_v2.getdiMyDividendsAmount(function (err, value) {
       if (errorHappened(err)) {
         return;
@@ -332,25 +331,25 @@ window.App = {
 
 
 
- 
 
-      policyContract_v2.checkAvailableDividends.call({ from: self.account }, function (err, value) {
-        if (errorHappened(err)) {
-          return;
-        }
-        if (value > 0) {
 
-          var ethValue = web3.fromWei(value, 'ether');
+    policyContract_v2.checkAvailableDividends.call({ from: self.account }, function (err, value) {
+      if (errorHappened(err)) {
+        return;
+      }
+      if (value > 0) {
 
-          var elem = document.getElementById('dividendsDiv');
-          elem.innerHTML = " <div id=\"getDividend\">"
-            + "<small>You have: " + ethValue.toString() + "</small>"
-            + "<button data-toggle=\"modal\" data-click=\"get-dividends-modal\" class=\"btn btn-sm btn-primary\" type=\"button\">GET DIVIDEND</button> </div>"
-            ;
-        }
+        var ethValue = web3.fromWei(value, 'ether');
 
-      });
-  
+        var elem = document.getElementById('dividendsDiv');
+        elem.innerHTML = " <div>"
+          + "<small>You have: " + ethValue.toString() + "</small>"
+          + "<button data-toggle=\"modal\" data-click=\"get-dividends-modal\" class=\"btn btn-sm btn-primary\" type=\"button\">GET PROFIT</button> </div>"
+          ;
+      }
+
+    });
+
 
 
   },
@@ -377,12 +376,13 @@ window.App = {
         return;
       }
       else {
+        App.refreshPage(result);
+
         var etherscan = etherscanAddress + "tx/" + result;
         $("#modalTitle").html("Investment Successful");
         $("#modalText").html("Great success! Transaction has been sent. Ethers should apear in the wallet any moment (it might take up to a few minutes). You can check progress here: " + "<br /><br />" + "<a class=\"btn-link\" href=\"" + etherscan + "\" target=\"_blank\">" + etherscan + "</a><br /><br />Ethers should appear in the wallet at any moment.");
         $("#generalModal").modal('show');
       }
-
     });
   },
 
@@ -400,9 +400,10 @@ window.App = {
         return;
       }
       else {
+        App.refreshPage(result);
 
-         var elem = document.getElementById('dividendsDiv');
-          elem.innerHTML = "Not available";
+        var elem = document.getElementById('dividendsDiv');
+        elem.innerHTML = "Not available";
 
         var etherscan = etherscanAddress + "tx/" + result;
         $("#modalTitle").html("Dividends transfer Successful");
@@ -417,6 +418,37 @@ window.App = {
     $("#modalTitle").html("This application works only in Ropsten Test Network");
     $("#modalText").html("Make sure your Ethereum client(MetaMask or Misk browser) is configured correctly and switched to Ropsten test network.");
     $("#generalModal").modal('show');
+  },
+
+  refreshPage: function (txh) {
+    var hash = txh;
+    var filter = web3.eth.filter('latest');
+    filter.watch(function (error, result) {
+      if (!error) {
+
+        web3.eth.getBlockNumber(function (error, blockNumber) {
+          if (!error) {
+
+            web3.eth.getBlock(blockNumber - 1, function (error, confirmedBlock) {
+              if (!error && confirmedBlock.transactions.length > 0) {
+
+                web3.eth.getTransaction(hash, function (error, transaction) {
+                  if (!error) {
+                    if (transaction && transaction.from == account) {
+                      filter.stopWatching();
+                      location.reload();
+                    }
+                  }
+                });
+
+              }
+            });
+
+          }
+        });
+      }
+    });
+
   }
 
 };

@@ -27,7 +27,6 @@ var dest_folder_build = 'build';
 var version = '201708160841'
 
 
-
 gulp.task('compile_sass', function () {
 
 	return gulp.src(asset_folder_css + '/*.scss')
@@ -101,6 +100,7 @@ gulp.task('buildsite', ['clean-build'], function () {
 		.pipe(include({ extensions: "js" }))
 		.pipe(rename({ suffix: ".min." + version }))
 		.pipe(uglify())
+		.on('error', function (err) { gutil.log(gutil.colors.red('[Error]'), err.toString()); })
 		.pipe(gulp.dest(dest_folder_build));
 
 	gulp.src(['*.html'])

@@ -1714,8 +1714,8 @@ $(function () {
     }, 500);
 
 
-
-
+    setTimeout(function(){ $("#page-title").hide();
+    $("#page-title-signup").show(1500);}, 5000);
 
 
 
@@ -1737,14 +1737,14 @@ $(function () {
     });
 
 
-	
-		$(document).on('click', '[data-click="submit-amount-form"]', function(){
-				
-			$(this).closest('.has-table-control').removeClass('table-control-active');
 
-			App.investMoney();
-				
-		});	
+    $(document).on('click', '[data-click="submit-amount-form"]', function () {
+
+      $(this).closest('.has-table-control').removeClass('table-control-active');
+
+      App.investMoney();
+
+    });
 
 
     $(document).on('click touchend', function (evt) {
@@ -1762,7 +1762,6 @@ $(function () {
       }
 
     });
-
 
 
 

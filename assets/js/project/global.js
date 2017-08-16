@@ -40,8 +40,8 @@ $(function () {
 		}, 500);
 
 
-
-
+		setTimeout(function(){ $("#page-title").hide();
+		$("#page-title-signup").show(1500);}, 5000);
 
 
 
