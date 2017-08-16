@@ -395,6 +395,10 @@ window.App = {
         return;
       }
       else {
+
+         var elem = document.getElementById('dividendsDiv');
+          elem.innerHTML = "Not available";
+
         var etherscan = etherscanAddress + "tx/" + result;
         $("#modalTitle").html("Dividends transfer Successful");
         $("#modalText").html("Great success! Transaction has been sent. Ethers should apear in the wallet any moment (it might take up to a few minutes). You can check progress here: " + "<br /><br />" + "<a class=\"btn-link\" href=\"" + etherscan + "\" target=\"_blank\">" + etherscan + "</a><br /><br />Ethers should appear in the wallet at any moment.");
