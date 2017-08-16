@@ -1737,13 +1737,14 @@ $(function () {
     });
 
 
-    $(document).on('click', '[data-click="show-amount-form"]', function () {
+	
+		$(document).on('click', '[data-click="submit-amount-form"]', function(){
+				
+			$(this).closest('.has-table-control').removeClass('table-control-active');
 
-      $('.has-table-control').removeClass('table-control-active');
-
-      $(this).closest('.has-table-control').addClass('table-control-active');
-
-    });
+			App.investMoney();
+				
+		});	
 
 
     $(document).on('click touchend', function (evt) {

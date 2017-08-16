@@ -1,7 +1,8 @@
 
 const Web3 = require('web3');
 const contractAddress_v1 = '0x554ab5f5fe7006223c2dd321b420e9a05d48ec93';
-const contractAddress_v2 = '0x92B189c3be7E3D3c91Fb576F93F7F68F28432e9b';
+const contractAddress_v2 = '0x90a8e37e1c563b50f579e5189480e56e82c5990d';
+
 const etherscanAddress = 'https://ropsten.etherscan.io/';
 
 var accounts;
@@ -33,6 +34,29 @@ function errorHappened(err) {
   }
 };
 
+function fillform(err, result)
+{
+    if (errorHappened(err)) {
+        return;
+      }
+
+      if (result.length == 0) {
+        App.displayNoWalletModal();
+        return;
+      }
+
+      this.accounts = result;
+      this.account = accounts[0];
+      web3.eth.defaultAccount = accounts[0];
+
+
+    App.fillInvestorPart();
+    App.fillInvestorInvestment();
+    App.fillInvestmentsHeader();
+    App.fillTableLine1();
+    App.fillTableLine2();
+};
+
 
 window.App = {
 
@@ -43,33 +67,19 @@ window.App = {
     var contract_v1 = web3.eth.contract(abi_v1);
     policyContract_v1 = contract_v1.at(contractAddress_v1);
 
-    var abi_v2 = JSON.parse('[{"constant":true,"inputs":[],"name":"isInvestmentPeriodEnded","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"policyOwner","type":"address"}],"name":"confirmPolicy","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalInsurers","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"itemId","type":"string"},{"name":"deviceBrand","type":"string"},{"name":"deviceYear","type":"string"},{"name":"wearLevel","type":"string"},{"name":"region","type":"string"}],"name":"insure","outputs":[{"name":"insured","type":"bool"}],"payable":true,"type":"function"},{"constant":false,"inputs":[{"name":"wearLevel","type":"uint256"}],"name":"claim","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"getPolicyEndDateTimestamp","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalInvestedAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"writtenPremiumAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalClaimsPaid","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"investors","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalInvestorsCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"transferDividends","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"payedDividendsAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"policiesLimit","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"lastPolicyDate","outputs":[{"name":"","type":"uint32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"getPolicyNextPayment","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"basePremium","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"deviceBrand","type":"string"},{"name":"deviceYear","type":"string"},{"name":"wearLevel","type":"string"},{"name":"region","type":"string"}],"name":"policyPrice","outputs":[{"name":"price","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"checkAvailableDividends","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"investmentsDeadlineTimeStamp","outputs":[{"name":"","type":"uint32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"maxPayout","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"claimed","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"invest","outputs":[{"name":"success","type":"bool"}],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"investmentsLimit","outputs":[{"name":"","type":"uint128"}],"payable":false,"type":"function"},{"inputs":[],"payable":true,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"deviceName","type":"string"},{"indexed":false,"name":"insurancePrice","type":"uint256"}],"name":"Insured","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"payout","type":"uint256"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"payout","type":"uint256"}],"name":"DividendsPayed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"value","type":"uint256"}],"name":"Invested","type":"event"}]');
+    var abi_v2 = JSON.parse('[{"constant":true,"inputs":[],"name":"isInvestmentPeriodEnded","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"policyOwner","type":"address"}],"name":"confirmPolicy","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalInsurers","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"itemId","type":"string"},{"name":"deviceBrand","type":"string"},{"name":"deviceYear","type":"string"},{"name":"wearLevel","type":"string"},{"name":"region","type":"string"}],"name":"insure","outputs":[{"name":"insured","type":"bool"}],"payable":true,"type":"function"},{"constant":false,"inputs":[{"name":"wearLevel","type":"uint256"}],"name":"claim","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"getPolicyEndDateTimestamp","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalInvestedAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"writtenPremiumAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"calculateDividends","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalClaimsPaid","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"investors","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"totalInvestorsCount","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"transferDividends","outputs":[{"name":"","type":"bool"}],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"payedDividendsAmount","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"getInvestorProportion","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"policiesLimit","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"lastPolicyDate","outputs":[{"name":"","type":"uint32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"getPolicyNextPayment","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"basePremium","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"deviceBrand","type":"string"},{"name":"deviceYear","type":"string"},{"name":"wearLevel","type":"string"},{"name":"region","type":"string"}],"name":"policyPrice","outputs":[{"name":"price","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"checkAvailableDividends","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"investmentsDeadlineTimeStamp","outputs":[{"name":"","type":"uint32"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"maxPayout","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"claimed","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"invest","outputs":[{"name":"success","type":"bool"}],"payable":true,"type":"function"},{"constant":false,"inputs":[],"name":"getFreeBalance","outputs":[{"name":"","type":"int256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"investmentsLimit","outputs":[{"name":"","type":"uint128"}],"payable":false,"type":"function"},{"inputs":[],"payable":true,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":false,"name":"deviceName","type":"string"},{"indexed":false,"name":"insurancePrice","type":"uint256"}],"name":"Insured","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"payout","type":"uint256"}],"name":"Claimed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"date","type":"uint256"},{"indexed":false,"name":"payout","type":"uint256"}],"name":"DividendsPayed","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"value","type":"uint256"}],"name":"Invested","type":"event"}]');
+
+
     var contract_v2 = web3.eth.contract(abi_v2);
     policyContract_v2 = contract_v2.at(contractAddress_v2);
 
-    App.fillInvestorPart();
-    App.fillInvestmentsHeader();
-    App.fillTableLine1();
-    App.fillTableLine2();
-
+ 
+    web3.eth.getAccounts(fillform);
   },
 
+ 
+
   fillInvestorPart: function () {
-
-    web3.eth.getAccounts(function (err, accs) {
-      if (errorHappened(err)) {
-        return;
-      }
-
-      if (accs.length == 0) {
-        App.displayNoWalletModal();
-        return;
-      }
-
-      accounts = accs;
-      account = accounts[0];
-      web3.eth.defaultAccount = accounts[0];
-
       var chunkedAcount = chunkWalletAddress(account).join(" ");
 
       $("#wallet_address").html(chunkedAcount);
@@ -83,9 +93,6 @@ window.App = {
           alert("There was an error fetching contract.");
         }
       });
-
-      App.fillInvestorInvestment();
-    });
   },
 
 
@@ -120,10 +127,6 @@ window.App = {
       });
 
 
-
-
-
-
     });
 
   },
@@ -132,6 +135,7 @@ window.App = {
 
   fillInvestmentsHeader: function () {
 
+    var that = this;
     // Total policies 
     policyContract_v1.totalInsurers.call(function (err, value) {
       if (errorHappened(err)) {
@@ -169,7 +173,7 @@ window.App = {
 
     // Total investors .. workaround because it is not working async in async. Error: invalid argument 1: hex number does not fit into 64 bits
     var totalInvestorsCount = 0;
-    policyContract_v2.totalInvestorsCount.call(account, function (err, value) {
+    policyContract_v2.totalInvestorsCount.call(that.account, function (err, value) {
       if (errorHappened(err)) {
         return;
       }
@@ -177,7 +181,7 @@ window.App = {
       $("#totalInvestorsCount").html((totalInvestorsCount).toString());
     });
 
-    policyContract_v1.totalInvestorsCount.call(account, function (err, value2) {
+    policyContract_v1.totalInvestorsCount.call(that.account, function (err, value2) {
       if (errorHappened(err)) {
         return;
       }
@@ -191,7 +195,7 @@ window.App = {
 
     // Total invested amount  .. workaround because it is not working async in async. Error: invalid argument 1: hex number does not fit into 64 bits
     var totalContractBalance = 0;
-    policyContract_v1.totalInvestedAmount.call(account, function (err, value) {
+    policyContract_v1.totalInvestedAmount.call(that.account, function (err, value) {
       if (errorHappened(err)) {
         return;
       }
@@ -200,7 +204,7 @@ window.App = {
       $("#totalInvestedAmount").html(totalContractBalance.toString());
     });
 
-    policyContract_v2.totalInvestedAmount.call(account, function (err, value) {
+    policyContract_v2.totalInvestedAmount.call(that.account, function (err, value) {
       if (errorHappened(err)) {
         return;
       }
@@ -235,6 +239,7 @@ window.App = {
 
 
   fillTableLine1: function () {
+    var self = this;
 
     policyContract_v1.totalInsurers.call(function (err, value) {
       if (errorHappened(err)) {
@@ -255,7 +260,7 @@ window.App = {
 
 
 
-    policyContract_v1.totalInvestedAmount.call(account, function (err, value) {
+    policyContract_v1.totalInvestedAmount.call(self.account, function (err, value) {
       if (errorHappened(err)) {
         return;
       }
@@ -266,7 +271,7 @@ window.App = {
       $("#predictedProfit_table").html("20%");
     });
 
-    policyContract_v1.totalInvestorsCount.call(account, function (err, value) {
+    policyContract_v1.totalInvestorsCount.call(self.account, function (err, value) {
       if (errorHappened(err)) {
         return;
       }
@@ -279,10 +284,8 @@ window.App = {
   },
 
 
-
-
-
   fillTableLine2: function () {
+    var self = this;
 
     policyContract_v2.totalInsurers.call(function (err, value) {
       if (errorHappened(err)) {
@@ -303,7 +306,7 @@ window.App = {
 
 
 
-    policyContract_v2.totalInvestedAmount.call(account, function (err, value) {
+    policyContract_v2.totalInvestedAmount.call(self.account, function (err, value) {
       if (errorHappened(err)) {
         return;
       }
@@ -314,7 +317,7 @@ window.App = {
       $("#predictedProfit2_table").html("13%");
     });
 
-    policyContract_v2.totalInvestorsCount.call(account, function (err, value) {
+    policyContract_v2.totalInvestorsCount.call(self.account, function (err, value) {
       if (errorHappened(err)) {
         return;
       }
@@ -324,38 +327,25 @@ window.App = {
 
 
 
-    //check dividends is available
-    policyContract_v2.checkAvailableDividends.call(account, function (err, value) {
-      if (errorHappened(err)) {
-        return;
-      }
-      if (value > 0) {
+ 
 
-        
+      policyContract_v2.checkAvailableDividends.call({ from: self.account }, function (err, value) {
+        if (errorHappened(err)) {
+          return;
+        }
+        if (value > 0) {
 
-        var elem = document.getElementById('dividendsDiv');
-        elem.innerHTML = " <div id=\"getDividend\">"
-											 + "<small>You have: 0.0000014</small>"
-											+ "<button data-toggle=\"modal\" data-click=\"get-dividends-modal\" class=\"btn btn-sm btn-primary\" type=\"button\">GET DIVIDEND</button> </div>"
-									;
+          var ethValue = web3.fromWei(value, 'ether');
 
+          var elem = document.getElementById('dividendsDiv');
+          elem.innerHTML = " <div id=\"getDividend\">"
+            + "<small>You have: " + ethValue.toString() + "</small>"
+            + "<button data-toggle=\"modal\" data-click=\"get-dividends-modal\" class=\"btn btn-sm btn-primary\" type=\"button\">GET DIVIDEND</button> </div>"
+            ;
+        }
 
-        // var elem = document.getElementById('getDividend');
-        // elem.parentNode.removeChild(elem);
-
-
-
-        // $("#dividendsAmount").html("You have: " + "0.0000014");
-        // var elem = document.getElementById('dividendsNotAvailable2');
-        // elem.parentNode.removeChild(elem);
-      }
-
-    });
-
-
-
-
-
+      });
+  
 
 
   },
@@ -371,7 +361,7 @@ window.App = {
     var weiValue = web3.toWei(investValue, 'ether');
     var weiNumber = web3.toBigNumber(weiValue);
 
-    policyContract_v1.invest(weiValue, { gas: 300000, from: account, value: weiNumber }, function (err, result) {
+    policyContract_v2.invest(weiValue, { gas: 300000, from: account, value: weiNumber }, function (err, result) {
 
       if (err != null) {
         console.log(err);
