@@ -1,7 +1,7 @@
 
 const Web3 = require('web3');
 const contractAddress_v1 = '0x554ab5f5fe7006223c2dd321b420e9a05d48ec93';
-const contractAddress_v2 = '0xcf7f03eb8a60f28e7d89f1f0f27b83981b530fb9';
+const contractAddress_v2 = '0xbccc714d56bc0da0fd33d96d2a87b680dd6d0df6';
 
 const etherscanAddress = 'https://ropsten.etherscan.io/';
 
@@ -406,7 +406,7 @@ window.App = {
         elem.innerHTML = "Not available";
 
         var etherscan = etherscanAddress + "tx/" + result;
-        $("#modalTitle").html("Dividends transfer Successful");
+        $("#modalTitle").html("Revenue transfer Successful");
         $("#modalText").html("Great success! Transaction has been sent. Ethers should apear in the wallet any moment (it might take up to a few minutes). You can check progress here: " + "<br /><br />" + "<a class=\"btn-link\" href=\"" + etherscan + "\" target=\"_blank\">" + etherscan + "</a><br /><br />Ethers should appear in the wallet at any moment.");
         $("#generalModal").modal('show');
       }
@@ -429,7 +429,7 @@ window.App = {
         web3.eth.getBlockNumber(function (error, blockNumber) {
           if (!error) {
 
-            web3.eth.getBlock(blockNumber - 1, function (error, confirmedBlock) {
+            web3.eth.getBlock(blockNumber - 4, function (error, confirmedBlock) {
               if (!error && confirmedBlock.transactions.length > 0) {
 
                 web3.eth.getTransaction(hash, function (error, transaction) {
@@ -460,22 +460,17 @@ window.addEventListener('load', function () {
     window.web3 = new Web3(web3.currentProvider);
 
     web3.version.getNetwork(function (err, netId) {
-      switch (netId) {
-        case "3":
-          break
-        default:
-          App.displayNoWalletModal();
+      if (netId == "3") {
+        App.start();
+      } else {
+        console.log(err);
+        App.displayNoWalletModal();
       }
     })
-
-
-
   } else {
     App.displayNoWalletModal();
 
     //window.web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
   }
-
-  App.start();
 
 });
