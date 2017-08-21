@@ -406,7 +406,7 @@ window.App = {
         elem.innerHTML = "Not available";
 
         var etherscan = etherscanAddress + "tx/" + result;
-        $("#modalTitle").html("Revenue transfer Successful");
+        $("#modalTitle").html("Claim transfer Successful");
         $("#modalText").html("Great success! Transaction has been sent. Ethers should apear in the wallet any moment (it might take up to a few minutes). You can check progress here: " + "<br /><br />" + "<a class=\"btn-link\" href=\"" + etherscan + "\" target=\"_blank\">" + etherscan + "</a><br /><br />Ethers should appear in the wallet at any moment.");
         $("#generalModal").modal('show');
       }
@@ -416,7 +416,7 @@ window.App = {
 
   displayNoWalletModal: function () {
     $("#modalTitle").html("This application works only in Ropsten Test Network");
-    $("#modalText").html("Make sure your Ethereum client(MetaMask or Misk browser) is configured correctly and switched to Ropsten test network.");
+    $("#modalText").html("Make sure your Ethereum client(MetaMask or Mist browser) is configured correctly and switched to Ropsten test network.");
     $("#generalModal").modal('show');
   },
 

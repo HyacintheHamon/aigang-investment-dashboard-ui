@@ -1,0 +1,8 @@
+{
+  "permissions": [
+  "*://aigang.network/*",
+  "*://ropsten.infura.io/*",
+  "*://localhost/*",
+  "*://cdnjs.cloudflare.com"
+]
+}
