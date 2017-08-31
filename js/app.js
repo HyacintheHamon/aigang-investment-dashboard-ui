@@ -416,7 +416,7 @@ window.App = {
 
   displayNoWalletModal: function () {
     $("#modalTitle").html("Only a few steps left to start investing!");
-    $("#modalText").html('To access our investment dashboard, you need to have <b>Ethereum Client</b> in place with Ropsten Testnet selected. (Metamask, Parity, Ethereum Mist browser or any other client that supports Web3). <div id="learnMore"><u>Learn More</u></div>\
+    $("#modalText").html('To access our investment dashboard, you need to have <b>Ethereum Client</b> in place with Ropsten Testnet selected. (Metamask, Parity, Ethereum Mist browser or any other client that supports Web3). <br/><br/>For the best experience use Metamask. <div id="learnMore"><u>Learn how</u></div>\
       <ul id="instructionsList" style="display:none;"><li>Metamask download instructions can be found <a href="https://metamask.io" target="_blank"><u>here</u></a></li>\
       <li>Select “Ropsten Testnet” and create a new wallet.</li>\
       <li>Refresh the page.</li>\
