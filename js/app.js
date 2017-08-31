@@ -415,8 +415,16 @@ window.App = {
   },
 
   displayNoWalletModal: function () {
-    $("#modalTitle").html("This application works only in Ropsten Test Network");
-    $("#modalText").html("Make sure your Ethereum client(MetaMask or Mist browser) is configured correctly and switched to Ropsten test network.");
+    $("#modalTitle").html("Only a few steps left to start investing!");
+    $("#modalText").html('To access our investment dashboard, you need to have <b>Ethereum Client</b> in place with Ropsten Testnet selected. (Metamask, Parity, Ethereum Mist browser or any other client that supports Web3). <div id="learnMore"><u>Learn More</u></div>\
+      <ul id="instructionsList" style="display:none;"><li>Metamask download instructions can be found <a href="https://metamask.io" target="_blank"><u>here</u></a></li>\
+      <li>Select “Ropsten Testnet” and create a new wallet.</li>\
+      <li>Refresh the page.</li>\
+      <li>To <b>invest</b>, you need <b>testnet Ethers</b>. Metamask gives you them by default, so you are ready to invest into Insurance.</li></ul><br/>\
+      If you have any questions, please join our <a href="http://slack.aigang.network" target="_blank"> <u><b>Slack</b></u></a>\
+      <br/><br/>\
+      <b>No time for this?</b> Watch our short DEMO video by clicking <a href="https://www.youtube.com/watch?v=Hz-uL1fk49A&" target="_blank"><u>here</u></a>. \
+       <script>$("#learnMore").click(function () {$("#instructionsList").toggle("1000ms");});</script>');
     $("#generalModal").modal('show');
   },
 
