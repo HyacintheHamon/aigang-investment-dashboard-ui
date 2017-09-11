@@ -368,7 +368,7 @@ window.App = {
     var weiValue = web3.toWei(investValue, 'ether');
     var weiNumber = web3.toBigNumber(weiValue);
 
-    policyContract_v2.invest(weiValue, { gas: 300000, from: account, value: weiNumber }, function (err, result) {
+    policyContract_v2.invest( { gas: 300000, from: account, value: weiNumber }, function (err, result) {
 
       if (err != null) {
         console.log(err);

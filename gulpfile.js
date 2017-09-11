@@ -24,7 +24,7 @@ var dest_folder_build = 'build';
 
 
 
-var version = '201708401053'
+var version = '201709111443'
 
 
 gulp.task('compile_sass', function () {
